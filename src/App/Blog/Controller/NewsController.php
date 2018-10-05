@@ -24,19 +24,24 @@ class NewsController extends Controller {
     Public function aNews() {
         $newsId = $this->request->getParams("id");
 
-        $news = $this->news->getUniqueNews($newsId);
-        $comment = $this->comment->getValidatedComment($newsId);
+        $aNews = $this->news->getUniqueNews($newsId);
+        $comments = $this->comment->getValidatedComment($newsId);
 
-        $this->createView(array('news' => $news, 'comment' => $comment));
+        $this->createView(array('aNews' => $aNews, 'comments' => $comments));
     }
 
     public function comment() {
-        $newsId = $this->request->getParams("id");
-        $userId = $this->request->getParams("author");
-        $content = $this->request->getParams("content");
+        if($this->request->getSession()->existAttribut("userId")) {
+            $newsId = $this->request->getParams("id");
+            $userId = $this->request->getParams("userId");
+            $content = $this->request->getParams("content");
 
-        $this->comment->addComment($newsId, $userId, $content);
+            $this->comment->addComment($newsId, $userId, $content);
 
-        $this->executeAction("index");
+            $this->executeAction("index");
+        }
+        else {
+            $this->redirect("connexion");
+        }
     }
 }

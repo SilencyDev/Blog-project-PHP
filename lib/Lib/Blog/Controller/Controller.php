@@ -34,13 +34,15 @@ abstract class Controller {
     public abstract function index();
 
     // Create the view for the current controller
-    protected function createView($dataView = array()) {
+    protected function createView($data = array()) {
         // setting up the controller name with the current controller
         $controllerClass = get_class($this);
-        $controller = str_replace("Controller", "", $controllerClass);
+        $controller = str_replace("API\App\Blog\Controller\\", "", $controllerClass);
+        $controller = str_replace("Controller", "", $controller);
+        $controller = strtolower($controller);
         // Instanciation and creating the view
         $view = new View($this->action, $controller);
-        $view->createView($dataView);
+        $view->create($data);
     }
 
     protected function redirect($controller, $action = null) {

@@ -7,7 +7,7 @@ use API\App\Blog\Manager\CommentManager;
 class Comment extends CommentManager {
 
 	protected $id;
-	protected $author;
+	protected $userId;
 	protected $creationDate;
 	protected $updateDate;
 	protected $content;
@@ -24,31 +24,31 @@ class Comment extends CommentManager {
 		return $this;
 	}
 
-	public function getAuthor() :string {	
-		return $this->author;
+	public function getUserId() :string {	
+		return $this->userId;
 	}
 
-	public function setAuthor(string $author) :self {
-		$this->author = $author;
+	public function setUserId(string $userId) :self {
+		$this->userId = $userId;
 
 		return $this;
 	}
 
-	public function getCreationDate() :\DateTime {	
+	public function getCreationDate() {	
 		return $this->creationDate;
 	}
 	
-	public function setCreationDate(\DateTime $creationDate) :self {	
+	public function setCreationDate($creationDate) :self {	
 		$this->position = $creationDate;
 
 		return $this;
 	}
 
-	public function getUpdateDate() :\DateTime {	
+	public function getUpdateDate() {	
 		return $this->updateDate;
 	}
 	
-	public function setUpdateDate(\DateTime $updateDate) :self {
+	public function setUpdateDate( $updateDate) :self {
 		$this->position = $updateDate;
 
 		return $this;

@@ -29,11 +29,11 @@ use API\Lib\Blog\Config\Configuration;
             // Getting credentials for database connexion
             $dsn = Configuration::get("dsn");
             $login = Configuration::get('login');
-            $pswd = Configuration::get('pswd');
+            $password = Configuration::get('password');
             // Starting connexion
-            self::$db = new PDO ($dsn, $login, $pswd, 
-                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            self::$db = new \PDO ($dsn, $login, $password, 
+                array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION));
         }
-        return self::db;
+        return self::$db;
     }
  }

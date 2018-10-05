@@ -19,11 +19,11 @@ class ConnexionController extends Controller {
 
     public function connect() {
         if($this->request->existParams("login") &&
-            $this->request->existParams("pswd")) {
+            $this->request->existParams("password")) {
                 $login =$this->request->getParams("login");
-                $pswd = $this->request->getParams("pswd");
-                if($this->user->connect($login, $pswd)) {
-                    $user = $this->user->getUser($login, $pswd);
+                $password = $this->request->getParams("password");
+                if($this->user->connect($login, $password)) {
+                    $user = $this->user->getUser($login, $password);
                     $this->request->getSession()->setAttribut("userId",
                         $user['userId']);
                     $this->request->getSession()->setAttribut("login",

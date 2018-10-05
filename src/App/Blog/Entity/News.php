@@ -65,22 +65,22 @@ class News extends NewsManager {
 		return $this;
 	}
 
-	public function getCreationDate() :\DateTime {
+	public function getCreationDate() {
 		return $this->creationDate;
 	}
 	
-	public function setCreationDate(\DateTime $creationDate) :self {
+	public function setCreationDate($creationDate) :self {
 		$this->creationDate = $creationDate;
 
 		return $this;
 	}
 
-	public function getUpdateDate() :\DateTime {
-		return $this->update;
+	public function getUpdateDate() {
+		return $this->updateDate;
 	}
 	
-	public function setUpdateDate(\DateTime $updateDate) :self {
-		$this->update = $update;
+	public function setUpdateDate($updateDate) :self {
+		$this->update = $updateDate;
 
 		return $this;
 	}

@@ -1,13 +1,13 @@
 <?php
 
-namespace API\App\Blog\Model;
+namespace API\App\Blog\Manager;
 
-use \Lib\Blog\Model\Db;
+use API\Lib\Blog\Model\Db;
 
-class UserManager {
+class UserManager extends Db {
 
     public function addUser(User $user) {
-        $q = $this->getDb->prepare('INSERT INTO user(firstName, lastName, pseudo, password, email, dateOfBirth) VALUES(:firstName, :lastName, :pseudo, :password, :email, :dateOfBirth)');
+        $q = $this->executeRequest('INSERT INTO user(firstName, lastName, pseudo, password, email, dateOfBirth) VALUES(:firstName, :lastName, :pseudo, :password, :email, :dateOfBirth)');
         $q->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STRING);
         $q->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STRING);
         $q->bindValue(':pseudo', $user->getPseudo(), PDO::PARAM_STRING);
@@ -26,7 +26,7 @@ class UserManager {
     }
 
     public function updateUser(User $user) {
-        $q->getDb()->prepare('UPDATE user SET imageId = :imageId, firstName = :firstName, lastName = :lastName, pseudo = :pseudo, password = :password, email = :email, dateOfBirth = :dateOfBirth, administrator = :administrator WHERE id ='.$user->id());
+        $q = $this->executeRequest('UPDATE user SET imageId = :imageId, firstName = :firstName, lastName = :lastName, pseudo = :pseudo, password = :password, email = :email, dateOfBirth = :dateOfBirth, administrator = :administrator WHERE id ='.$user->id());
         $q->bindValue(':imageId', $user->getImageId(), PDO::PARAM_INT);
         $q->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STRING);
         $q->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STRING);
@@ -40,14 +40,14 @@ class UserManager {
     }
 
     public function deleteUser(User $user) {
-        $this->getDb()->exec('DELETE from user WHERE id ='.$user->id());
+        $this->executeRequest('DELETE from user WHERE id ='.$user->id());
     }
 
     public function emailExist($email) {
-        return $this->getDb->query('SELECT COUNT(*) FROM user WHERE email = $email')->fetchColumn();
+        return $this->executeRequest('SELECT COUNT(*) FROM user WHERE email = $email')->fetchColumn();
     }
 
     public function pseudoExist($pseudo) {
-        return $this->getDb->query('SELECT COUNT(*) FROM user WHERE pseudo = $pseudo')->fetchColumn();
+        return $this->executeRequest('SELECT COUNT(*) FROM user WHERE pseudo = $pseudo')->fetchColumn();
     }
 }

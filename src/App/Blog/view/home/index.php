@@ -1,4 +1,5 @@
-<html>
-<base href="<?= webRoot ?>" >
-<? echo "hello"; ?>
-</html>
+<?php
+
+
+$pswd = "hello";
+print_R($pswd);

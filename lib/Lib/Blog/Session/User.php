@@ -10,12 +10,12 @@ class User extends Db {
     public function connect($login, $pswd) {
         $sql = "SELECT id FROM user WHERE email=? and password=?";
         $user= $this->executeRequest($sql, array($login, $pswd));
-        return ($user->rowCount() ==1);
+        return ($user->rowCount() == 1);
     }
 
     // return the existing user from the database
-    public function getUser($login, $pswd) {
-        $sql = "SELECT id AS userId, email AS login, password AS pswd FROM user WHERE email=? AND password=?";
+    public function getUser($login, $password) {
+        $sql = "SELECT id AS userId, email AS login, password FROM user WHERE email=? AND password=?";
         $user = $this->executeRequest($sql, array($login, $pswd));
         if ($user->rowcount() == 1)
             return $user->fetch();

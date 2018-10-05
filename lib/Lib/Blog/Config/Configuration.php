@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib\Blog\Config;
+namespace API\Lib\Blog\Config;
 
 class Configuration {
 
@@ -9,7 +9,7 @@ class Configuration {
     // Return param value from the config file
     public static function get($name, $defaultValue = null) {
         if (isset(self::getParams()[$name])) {
-            $value = self::getparams()[$name];
+            $value = self::getParams()[$name];
         }
         else {
             $value = $defaultValue;
@@ -20,15 +20,15 @@ class Configuration {
     // return the array from the config file
     private static function getParams() {
         if(self::$params == null) {
-            $filePath = realpath(__DIR__ . "..\..\..\..\src\App\config\prod.ini");
+            $filePath = realpath(__DIR__."/../../../../src/App/Blog/config/prod.ini");
             if (!file_exists($filePath)) {
-                $filePath = realpath(__DIR__ . "..\..\..\..\src\App\config\dev.ini");
+                $filePath = realpath(__DIR__."/../../../../src/App/Blog/config/dev.ini");;
             }
-            if (!file_exists($filepath)) {
-                throw new Exception("Configuration file not found");
+            if (!file_exists($filePath)) {
+                throw new \Exception("Configuration file not found");
             }
             else {
-                self::$params = parse_ini_file($filepath);
+                self::$params = parse_ini_file($filePath);
             }
         }
         return self::$params;

@@ -24,24 +24,22 @@ class Router {
     
     // Create a controller from the request
     private function newController(Request $request) {
-        $controller = "Home"; // default controller
+        $controller = "home"; // default controller
         if ($request->paramsExist('controller')) {
             $controller = $request->getParams('controller');
             $controller = ucfirst(strtolower($controller));
         }
         // Create the file name of the controller
-        $controllerClass =  $controller."Controller";
+        $controllerClass =  "\\API\\App\\Blog\\Controller\\{$controller}Controller";
 
-        $controllerFile = realpath(__DIR__."./../../../../src/App/Blog/Controller/".$controllerClass.".php");
-        if (file_exists($controllerFile)) {
+        if (class_exists($controllerClass)) {
             // Instanciation of the controller from the request
-            require($controllerFile);
             $controller = new $controllerClass();
             $controller->setRequest($request);
             return $controller;
         }
         else
-            throw new \Exception("'$controllerFile' file not found");
+            throw new \Exception("'$controllerClass' file not found");
     }
 
     // Looking for an action to execute from the request

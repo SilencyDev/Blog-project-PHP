@@ -1,15 +1,17 @@
 <?php
 
-namespace API\App\Blog\Model;
+namespace API\App\Blog\Manager;
 
-class CommentManager
-{
+use API\Lib\Blog\Model\Db;
+
+class CommentManager extends Db {
+
   public function countComment() {
-    return $this->getDb->query('SELECT COUNT(*) FROM comments')->fetchColumn();
+    return $this->executeRequest('SELECT COUNT(*) FROM comment')->fetchColumn();
   }
 
-  protected function addComment(Comment $newsId, $author, $content) {
-    $q = $this->getDb->prepare('INSERT INTO comments(newsId, author, content) VALUES(:newsId, :author, :content)');
+  protected function addComment(Comment $newsId, $userId, $content) {
+    $q = $this->executeRequest('INSERT INTO comment(newsId, userId, content) VALUES(:newsId, :userId, :content)');
     $q->bindValue(':content', $comment->getContent(), PDO::PARAM_STRING);
 
     $q->execute();
@@ -23,7 +25,7 @@ class CommentManager
   }
 
   public function updateComment(Comment $comment) {
-    $q->getDb->prepare('UPDATE comments SET content = :content, validated = :validated WHERE id ='.$comment->id());
+    $q = $this->executeRequest('UPDATE comment SET content = :content, validated = :validated WHERE id ='.$comment->id());
     $q->bindValue(':content', $comment->getContent(), PDO::PARAM_STRING);
     $q->bindvalue(':validated', $comment->getValidated(), PDO::PARAM_BOOLEAN);
 
@@ -35,39 +37,37 @@ class CommentManager
   }
   
   public function getComment(integer $id) {
-    $q = $this->getDb->prepare('SELECT id, news, author, content FROM comments WHERE id = :id');
+    $q = $this->executeRequest('SELECT id, news, userId, content FROM comment WHERE id = :id');
     $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $q->execute();
     
-    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\App\Blog\Entity\Comment');
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'API\App\Blog\Entity\Comment');
     
     return $q->fetch();
   }
 
-  public function getValidatedComment(integer $id) {
-    $q = $this->getDb->prepare('SELECT id, news, author, content FROM comments WHERE id = :id AND validated = 1');
-    $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
-    $q->execute();
-    
-    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\App\Blog\Entity\Comment');
-    
-    return $q->fetch();
+  public function getValidatedComment($newsId) {
+    $sql = 'SELECT id, newsId, userId, content, creationDate FROM comment WHERE newsId = (?) and validated = 1';
+    $newsId = (int) $newsId;
+    $comments = $this->executeRequest($sql, array($newsId));
+
+    return $comments;
   }
 
   public function deleteComment(integer $id) {
-    $this->getDb->exec('DELETE FROM comments WHERE id = '.$id);
+    $this->executeRequest('DELETE FROM comments WHERE id = '.$id);
   }
 
   public function deleteCommentsFromNews(integer $newsId) {
-    $this->getDb->exec('DELETE FROM comments WHERE news = '.$newsId);
+    $this->executeRequest('DELETE FROM comments WHERE news = '.$newsId);
   }
 
   public function getCommentsFromNews(integer $news) {
-    $q = $this->getDb->prepare('SELECT id, articleId, author, content, date FROM comments WHERE articleId = :articleId');
-    $q->bindValue(':articleId', $news, \PDO::PARAM_INT);
+    $q = $this->executeRequest('SELECT id, newsId, userId, content, date FROM comment WHERE newsId = :newsId');
+    $q->bindValue(':newsId', $news, \PDO::PARAM_INT);
     $q->execute();
     
-    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\App\Blog\Entity\Comment');
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, 'API\App\Blog\Entity\Comment');
     
     $comments = $q->fetchAll();
     
