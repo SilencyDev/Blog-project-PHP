@@ -5,4 +5,3 @@
     <textarea type ="content" id="content" name="content" placeholder="content" required></textarea><br />
     <input type="submit" value="Submit"/>
 </form>
-<?php var_dump(); ?>

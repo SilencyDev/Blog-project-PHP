@@ -11,6 +11,7 @@ use API\App\Blog\Entity\User;
 class AdminController extends IsAdminController {
 
     public function __construct() {
+
         $this->news = new News();
         $this->comment = new Comment();
         $this->image = new Image();
@@ -29,7 +30,7 @@ class AdminController extends IsAdminController {
             $content = $this->request->getParams("content");
             $title = $this->request->getParams("title");
 
-            $this->news->addNews($content, $title);
+            $this->news->addNews($content, $title, $this->request);
             $this->redirect('News');
     }
 

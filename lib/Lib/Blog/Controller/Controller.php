@@ -44,7 +44,7 @@ abstract class Controller {
         $controller = strtolower($controller);
         // Instanciation and creating the view
         $view = new View($this->action, $controller);
-        $view->create($data);
+        $view->create($data, $this->request);
     }
 
     protected function redirect($controller, $action = null) {

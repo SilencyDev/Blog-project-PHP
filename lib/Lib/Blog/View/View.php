@@ -21,21 +21,21 @@ class View {
     }
 
     // Create and display the view
-    public function create($data) {
+    public function create($data, $request = NULL) {
         // Create view part
-        $content = $this->createFile($this->viewFile, $data);
+        $content = $this->createFile($this->viewFile, $data, $request);
         // Web path for web server
         // For URI controller/action/id
         $webRoot = Configuration::get("webRoot", "/");
         // Using template
         $view = $this->createFile(realpath(__DIR__."/../../../../src/App/Blog/view/templates/template.php"),
-            array('title' => $this->title, 'content' => $content, 'webRoot' => $webRoot));
+            array('title' => $this->title, 'content' => $content, 'webRoot' => $webRoot),$request);
         // Return view to browser
         echo $view;
     }
 
     // Create a view's file and return it
-    public function createfile($viewFile, $data) {
+    public function createfile($viewFile, $data, $request = NULL) {
         if (file_exists($viewFile)) {
             // Turn array's $data usable for the view
             extract($data);

@@ -35,20 +35,13 @@ class NewsManager extends Db {
     }
   }
 
-  public function addNews($title, $content) {
-    $sql = ('INSERT INTO news(title, content) VALUES(?, ?)');
+  public function addNews($title, $content, $request) {
+    $sql = ('INSERT INTO news(title, content, userId, creationDate) VALUES(?, ?, ?, ?)');
     $title = (string) $title;
     $content = (string) $content;
-  
 
-    $news = $this->executeRequest($sql,array($title, $content));
+    $news = $this->executeRequest($sql,array($title, $content, $request->getSession()->getAttribut("id"), date("Y/m/d H:i:s")));
 
-    $news->hydrate([
-        'id' => self::$db->lastInsertId(),
-        'userId' => $this->request->getSession()->getAttribut("id"),
-        'creationDate' => date(),
-        'updateDate' => ''
-    ]);
   }
 
   protected function updateNews($content, $title, $category) {
