@@ -1,0 +1,1 @@
+<p><?= $this->clear($errorMsg) ?></p>

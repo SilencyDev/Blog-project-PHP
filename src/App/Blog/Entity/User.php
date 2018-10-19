@@ -97,11 +97,11 @@ class User extends UserManager {
 		return $this;
 	}
 
-	public function getAdministrator() :boolean {
+	public function getAdministrator() {
 		return $this->administrator;
 	}
 
-	public function setAdministrator(boolean $administrator) :self {
+	public function setAdministrator($administrator) :self {
 		$this->administrator = $administrator;
 
 		return $this;
@@ -116,4 +116,25 @@ class User extends UserManager {
 
 		return $this;
 	}
+
+	public function userHashVerify($login, $password) {
+		$sql = "SELECT password FROM user WHERE email = (?)";
+		$passwordHash = $this->executeRequest($sql, array($login));
+		$passwordHash = $passwordHash->fetch();
+		$passwordHash = $passwordHash["password"];
+
+		return password_verify($password, $passwordHash);
+	}
+
+    // return the existing user from the database
+    public function getUser($login) {
+        $sql = "SELECT id, email , password, imageId, firstName, lastName, pseudo, 
+			dateOfBirth, administrator, profileDate FROM user WHERE email=?";
+        $user = $this->executeRequest($sql, array($login));
+        if ($user->rowcount() == 1) {
+			return $user->fetch();
+		}
+        else
+            throw new \Exception("Your login or password is incorrect");
+    }
 }

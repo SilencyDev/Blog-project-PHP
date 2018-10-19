@@ -39,8 +39,11 @@ class UserManager extends Db {
         $q->execute();
     }
 
-    public function deleteUser(User $user) {
-        $this->executeRequest('DELETE from user WHERE id ='.$user->id());
+    public function deleteUser($userId) {
+        $sql = ('DELETE FROM user WHERE id = '.(int) $userId);
+        $q = $this->executeRequest($sql,array($userId));
+
+        return $q;
     }
 
     public function emailExist($email) {

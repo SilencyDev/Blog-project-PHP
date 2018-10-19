@@ -7,17 +7,21 @@ use API\Lib\Blog\Model\Db;
 class CommentManager extends Db {
 
   public function countComment() {
-    return $this->executeRequest('SELECT COUNT(*) FROM comment')->fetchColumn();
+    $sql = ('SELECT COUNT(*) FROM comment');
+
+    $comments = $this->executeRequest($sql)->fetchColumn();
+
+    return $comments;
   }
 
-  protected function addComment(Comment $newsId, $userId, $content) {
+  protected function addComment($newsId, $userId, $content) {
     $q = $this->executeRequest('INSERT INTO comment(newsId, userId, content) VALUES(:newsId, :userId, :content)');
     $q->bindValue(':content', $comment->getContent(), PDO::PARAM_STRING);
 
     $q->execute();
 
     $q->hydrate([
-        'id' => $this->getDb->lastInsertId(),
+        'id' => self::$db->lastInsertId(),
         'creationDate' => date()->format('d/m/Y H:i:s'),
         'updateDate' => '',
         'validated' => '0'
@@ -54,12 +58,18 @@ class CommentManager extends Db {
     return $comments;
   }
 
-  public function deleteComment(integer $id) {
-    $this->executeRequest('DELETE FROM comments WHERE id = '.$id);
+  public function deleteComment($commentId) {
+    $sql = ('DELETE FROM comment WHERE id = '.(int) $commentId);
+    $q = $this->executeRequest($sql,array($commentId));
+
+    return $q;
   }
 
-  public function deleteCommentsFromNews(integer $newsId) {
-    $this->executeRequest('DELETE FROM comments WHERE news = '.$newsId);
+  public function deleteCommentsFromNews($newsId) {
+    $sql = ('DELETE FROM comment WHERE newsId = '.(int) $newsId);
+    $q = $this->executeRequest($sql,array($newsId));
+
+    return $q;
   }
 
   public function getCommentsFromNews(integer $news) {

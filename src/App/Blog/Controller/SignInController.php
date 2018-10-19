@@ -14,7 +14,7 @@ class SignInController extends Controller {
     }
 
     public function index() {
-        $this->createView;
+        $this->createView();
     }
 
     public function newUser() {

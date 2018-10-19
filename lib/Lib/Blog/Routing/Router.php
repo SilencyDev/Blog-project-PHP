@@ -17,7 +17,7 @@ class Router {
 
             $controller->executeAction($action);
         }
-        catch (Exception $e) {
+        catch (\Exception $e) {
             $this->manageError($e);
         }
     }
@@ -30,7 +30,7 @@ class Router {
             $controller = ucfirst(strtolower($controller));
         }
         // Create the file name of the controller
-        $controllerClass =  "\\API\\App\\Blog\\Controller\\{$controller}Controller";
+        $controllerClass =  "API\\App\\Blog\\Controller\\{$controller}Controller";
 
         if (class_exists($controllerClass)) {
             // Instanciation of the controller from the request
@@ -51,9 +51,13 @@ class Router {
         return $action;
     }
 
+    public function userError() {
+        ;
+    }
+
     // Display an error
-    private function manageError(Exception $exception) {
-        $view = new View('error');
+    private function manageError(\Exception $exception) {
+        $view = new View('/error/index');
         $view->create(array('errorMsg' => $exception->getMessage()));
     }
 }

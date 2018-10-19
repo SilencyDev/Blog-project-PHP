@@ -21,7 +21,7 @@ Class Session {
             return $_SESSION[$name];
         }
         else {
-            throw new Exception("'$name' attribut is not found");
+            throw new \Exception("'$name' attribut is not found");
         }
     }
 

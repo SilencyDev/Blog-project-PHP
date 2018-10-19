@@ -4,6 +4,8 @@ namespace API\Lib\Blog\Controller;
 
 use API\Lib\Blog\Request\Request;
 use API\Lib\Blog\View\View;
+use API\Lib\Blog\Config\Configuration;
+use API\Lib\Blog\Session\Session;
 
 abstract class Controller {
 

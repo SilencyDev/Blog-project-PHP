@@ -7,7 +7,7 @@ use API\App\Blog\Manager\ImageManager;
 class Image extends ImageManager {
 
 	protected $id;
-	protected $imageUrl;
+	protected $url;
 	protected $name;
 
 	public function getId() :integer {
@@ -20,12 +20,12 @@ class Image extends ImageManager {
 		return $this;
 	}
 
-	public function getImageUrl() :string {
-		return $this->imageUrl;
+	public function getUrl() :string {
+		return $this->url;
 	}
 
-	public function setImageUrl(string $imageUrl) :self {
-		$this->imageUrl = $imageUrl;
+	public function setUrl(string $url) :self {
+		$this->url = $url;
 
 		return $this;
 	}

@@ -8,7 +8,6 @@ class News extends NewsManager {
 
 	protected $id;
 	protected $userId;
-	protected $imageId;
 	protected $content;
 	protected $title;
 	protected $creationDate;
@@ -31,16 +30,6 @@ class News extends NewsManager {
 	
 	public function setUserId(integer $userId) :self {
 		$this->userId = $userId;
-
-		return $this;
-	}
-
-	public function getImageId() :integer {
-		return $this->imageId;
-	}
-	
-	public function setImageId(integer $imageId) :self {
-		$this->imageId = $imageId;
 
 		return $this;
 	}

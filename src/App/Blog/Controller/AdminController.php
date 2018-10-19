@@ -18,19 +18,39 @@ class AdminController extends IsAdminController {
     }
 
     public function index() {
-        $this->createView;
+        $this->createView();
+    }
+
+    public function addNewsPage() {
+        $this->createView();
     }
 
     public function addNews() {
+            $content = $this->request->getParams("content");
+            $title = $this->request->getParams("title");
 
+            $this->news->addNews($content, $title);
+            $this->redirect('News');
     }
 
     public function updateNews() {
+        if(isset($content, $title, $category)) {
+            $content = $this->request->getParams("content");
+            $title = $this->request->getParams("title");
+            $category = $this->request->getParams("category");
 
+            $this->news->UpdateNews($content, $title, $category);
+            $this->redirect('Admin');
+        }
+        else {
+            $this->redirect('Admin','updateNewsPage');
+        }
     }
 
     public function deleteNews() {
+        $newsId = $this->request->getParams("id");
 
+        $this->news->deleteNews($newsId);
     }
 
     Public function validComment() {
@@ -38,11 +58,12 @@ class AdminController extends IsAdminController {
     }
 
     public function deleteComment() {
+        $commentId = $this->request->getParams("id"); 
 
+        $this->news->deleteComment($commentId);
     }
 
     public function updateProfile() {
 
     }
-
 }
