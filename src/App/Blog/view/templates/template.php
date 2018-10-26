@@ -9,11 +9,11 @@
     <body>
         <div id="global"> <!-- #global -->
             <header>
-                <a href="home/index">Accueil</a>
-                <a href="News/index">Liste des articles</a>
-                <a href="Connect/index">Se connecter</a>
-                <a href="SignIn/index">S'enregistrer</a>
-                <p>Je vous souhaite la bienvenue sur ce modeste blog.</p>
+                <a href="home/index">Home</a>
+                <a href="News/index">News</a>
+                <a href="Connect/index">Log in</a>
+                <a href="SignIn/index">Sign up</a>
+                <p>Welcome to my personal blog.</p>
             </header>
             <div id="error"> <!-- #error -->
                 <?php if(isset( $_SESSION['error']) && $_SESSION['error'] != "") :
@@ -25,10 +25,13 @@
                 <br/>
                 <?= $content ?>
                 <br/>
-            </div> <!-- #content -->
+            </div><br/> <!-- #content -->
             <footer id="footer">
             <a href="Admin/index">Administration</a></div>
-                Blog réalisé avec PHP, HTML5 et CSS.
+            <?php if ($request->getSession()->existAttribut("id")) : ?>
+            <a href = connect/disconnect> Disconnect </a><br/>
+                <?php endif; ?>
+                Blog made with PHP, HTML5 et CSS.
             </footer>
         </div> <!-- #global -->
     </body>

@@ -25,24 +25,12 @@ class ConnexionController extends Controller {
 
                 if($this->user->userHashVerify($login, $password)) {
                     $user = $this->user->getUser($login);
-                    $this->request->getSession()->setAttribut("id",
-                        $user['id']);
-                    $this->request->getSession()->setAttribut("imageId",
-                        $user['imageId']);
-                    $this->request->getSession()->setAttribut("firstName",
-                        $user['firstName']);
-                    $this->request->getSession()->setAttribut("lastName",
-                        $user['lastName']);
-                    $this->request->getSession()->setAttribut("email",
-                        $user['email']);
-                    $this->request->getSession()->setAttribut("dateOfBirth",
-                        $user['dateOfBirth']);
-                    $this->request->getSession()->setAttribut("administrator",
-                        $user['administrator']);
-                    $this->request->getSession()->setAttribut("profileDate",
-                        $user['profileDate']);
-                    
-                        $this->redirect("admin");
+
+                    foreach($user as $key => $value) {
+                    $this->request->getSession()->setAttribut($key,$value);
+                    }
+
+                    $this->redirect("admin");
                 }
                 else {
                     $this->redirect("connect");

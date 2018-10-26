@@ -35,27 +35,25 @@ class AdminController extends IsAdminController {
     }
 
     public function updateNews() {
-        if(isset($content, $title, $category)) {
             $content = $this->request->getParams("content");
             $title = $this->request->getParams("title");
-            $category = $this->request->getParams("category");
 
-            $this->news->UpdateNews($content, $title, $category);
+            $this->news->UpdateNews($content, $title, $this->request);
             $this->redirect('Admin');
-        }
-        else {
-            $this->redirect('Admin','updateNewsPage');
-        }
     }
 
     public function deleteNews() {
-        $newsId = $this->request->getParams("id");
+        $newsId = $this->request->getParams("newsId");
 
         $this->news->deleteNews($newsId);
     }
 
-    Public function validComment() {
+    Public function validCommentPage() {
+        $this->createView();
+    }
 
+    Public function validComment() {
+        
     }
 
     public function deleteComment() {

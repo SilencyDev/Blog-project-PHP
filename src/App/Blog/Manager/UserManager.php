@@ -6,37 +6,28 @@ use API\Lib\Blog\Model\Db;
 
 class UserManager extends Db {
 
-    public function addUser(User $user) {
-        $q = $this->executeRequest('INSERT INTO user(firstName, lastName, pseudo, password, email, dateOfBirth) VALUES(:firstName, :lastName, :pseudo, :password, :email, :dateOfBirth)');
-        $q->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STRING);
-        $q->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STRING);
-        $q->bindValue(':pseudo', $user->getPseudo(), PDO::PARAM_STRING);
-        $q->bindValue(':password', $user->getPassword(), PDO::PARAM_STRING);
-        $q->bindValue(':email', $user->getEmail(), PDO::PARAM_STRING);
-        $q->bindValue(':dateOfBirth', $user->getDateOfBirth()->format('d/m/Y'), PDO::PARAM_INT);
+    public function addUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $profileDate) {
+        $sql = 'INSERT INTO user(firstName, lastName, pseudo, password, email, dateOfBirth, profileDate) VALUES(?, ?, ?, ?, ?, ?, ?)';
+        $firstName = (string) $firstName;
+        $lastName = (string) $lastName;
+        $pseudo = (string) $pseudo;
+        $password = (string) $password;
+        $email = (string) $email;
 
-        $q->execute();
-
-        $user->hydrate([
-            'id' => $this->db->lastInsertId(),
-            'imageId'=> 1,
-            'administrator' => 0,
-            'profileDate' => date('')->format('d/m/Y')
-        ]);
+        $q = $this->executeRequest($sql,array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s")));
     }
 
-    public function updateUser(User $user) {
-        $q = $this->executeRequest('UPDATE user SET imageId = :imageId, firstName = :firstName, lastName = :lastName, pseudo = :pseudo, password = :password, email = :email, dateOfBirth = :dateOfBirth, administrator = :administrator WHERE id ='.$user->id());
-        $q->bindValue(':imageId', $user->getImageId(), PDO::PARAM_INT);
-        $q->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STRING);
-        $q->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STRING);
-        $q->bindValue(':pseudo', $user->getPseudo(), PDO::PARAM_STRING);
-        $q->bindValue(':password', $user->getPassword(), PDO::PARAM_STRING);
-        $q->bindValue(':email', $user->getEmail(), PDO::PARAM_STRING);
-        $q->bindValue(':dateOfBirth', $user->getDateOfBirth()->format('d/m/Y'), PDO::PARAM_INT);
-        $q->bindValue(':administrator', $user->getAdministrator(), PDO::PARAM_BOOLEAN);
+    public function updateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $profileDate, $request) {
+        $q = 'UPDATE user SET imageId = ?, firstName = ?, lastName = ?, pseudo = ?, password = ?, email = ?, dateOfBirth = ?, administrator = ? WHERE id =?';
+        $imageId = (int) $imageId;
+        $firstName = (string) $firstName;
+        $lastName = (string) $lastName;
+        $pseudo = (string) $pseudo;
+        $password = (string) $password;
+        $email = (string) $email;
+        $administrator = (boolean) $administrator;
 
-        $q->execute();
+        $q = $this->executeRequest($sql,array($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s"), $request->getSession()->getAttribut('id')));
     }
 
     public function deleteUser($userId) {
@@ -47,10 +38,32 @@ class UserManager extends Db {
     }
 
     public function emailExist($email) {
-        return $this->executeRequest('SELECT COUNT(*) FROM user WHERE email = $email')->fetchColumn();
+        $sql = 'SELECT COUNT(*) FROM user WHERE email = $email';
+        return $this->executeRequest($sql,array($email))->fetchColumn();
     }
 
     public function pseudoExist($pseudo) {
-        return $this->executeRequest('SELECT COUNT(*) FROM user WHERE pseudo = $pseudo')->fetchColumn();
+        $sql = 'SELECT COUNT(*) FROM user WHERE pseudo = $pseudo';
+        return $this->executeRequest($sql,array($pseudo))->fetchColumn();
+    }
+    
+	public function userHashVerify($login, $password) {
+		$sql = "SELECT password FROM user WHERE email = (?)";
+		$passwordHash = $this->executeRequest($sql, array($login));
+		$passwordHash = $passwordHash->fetch();
+		$passwordHash = $passwordHash["password"];
+
+		return password_verify($password, $passwordHash);
+	}
+
+    public function getUser($login) {
+        $sql = "SELECT id, email , password, imageId, firstName, lastName, pseudo, 
+			dateOfBirth, administrator, profileDate FROM user WHERE email=?";
+        $user = $this->executeRequest($sql, array($login));
+        if ($user->rowcount() == 1) {
+			return $user->fetch();
+		}
+        else
+            throw new \Exception("Your login or password is incorrect");
     }
 }

@@ -30,18 +30,16 @@ class NewsController extends Controller {
         $this->createView(array('aNews' => $aNews, 'comments' => $comments));
     }
 
-    public function comment() {
-        if($this->request->getSession()->existAttribut("userId")) {
-            $newsId = $this->request->getParams("id");
-            $userId = $this->request->getParams("userId");
+    public function addComment() {
+        if($this->request->getSession()->existAttribut("id")) {
             $content = $this->request->getParams("content");
-
-            $this->comment->addComment($newsId, $userId, $content);
+            $newsId =  $this->request->getParams("newsId");
+            $this->comment->addComment($content, $newsId, $this->request);
 
             $this->executeAction("index");
         }
         else {
-            $this->redirect("connexion");
+            $this->redirect("connect");
         }
     }
 }

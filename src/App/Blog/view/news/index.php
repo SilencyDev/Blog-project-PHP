@@ -9,7 +9,7 @@
             </a>
             <time><?= $this->clear($aNews['creationDate']) ?></time>
         </header>
-        <p><?= $this->clear($aNews['content']) ?></p>
+        <p><?= $this->clear(substr($aNews['content'],0,200)) ?>...</p>
     </article>
     <hr />
 <?php endforeach; ?>

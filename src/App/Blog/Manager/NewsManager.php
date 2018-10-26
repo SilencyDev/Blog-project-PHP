@@ -7,11 +7,11 @@ use API\Lib\Blog\Model\Db;
 class NewsManager extends Db {
 
   public function countNews() {
-    $sql = ('SELECT COUNT(*) FROM news');
+    $sql = 'SELECT count(*) FROM news';
 
-    $news = $this->executeRequest($sql)->fetchColumn();
+    $countNews = $this->executeRequest($sql)->fetchColumn();
 
-    return $news;
+    return $countNews;
   }
 
   public function getNews() {
@@ -23,7 +23,7 @@ class NewsManager extends Db {
   }
 
   public function getUniqueNews($newsId) {
-    $sql = "SELECT id, userId, title, content, creationDate, updateDate, category FROM news WHERE id = (?)";
+    $sql = "SELECT id, userId, title, content, creationDate, updateDate, category FROM news WHERE id = ?";
     $newsId = (int) $newsId;
 
     $aNews = $this->executeRequest($sql,array($newsId));
@@ -44,23 +44,16 @@ class NewsManager extends Db {
 
   }
 
-  protected function updateNews($content, $title, $category) {
-    $sql = $this->executeRequest('UPDATE news SET content = ?, title = ?, category = ? WHERE id ='.$news->getId());
+  protected function updateNews($content, $title, $request) {
+    $sql = 'UPDATE news SET content = ?, title = ?, updateDate = ? WHERE id = ?';
     $content = (string) $content;
-    $title =  (string) $title;
-    $category = (string) $category;
+    $title = (string) $title;
 
-    $news = $this->executeRequest($sql,array($imageId, $content, $title, $category));
-
-    $news->hydrate([
-        'updateDate' => date()
-    ]);
+    $news = $this->executeRequest($sql,array($content, $title, date("Y/m/d H:i:s"), $request->getParams('newsId')));
   }
 
-  public function deleteNews($id) {
-    $sql = ('DELETE FROM news WHERE id = '.(int) $id);
-    $q = $this->executeRequest($sql,array($id));
-
-    return $q;
+  public function deleteNews($request) {
+    $sql = 'DELETE FROM news WHERE id = ?';
+    $q = $this->executeRequest($sql,array($request->getParams('newsId')));
   }
 }
