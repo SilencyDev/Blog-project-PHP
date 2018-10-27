@@ -45,15 +45,15 @@ class NewsManager extends Db {
   }
 
   protected function updateNews($content, $title, $request) {
-    $sql = 'UPDATE news SET content = ?, title = ?, updateDate = ? WHERE id = ?';
+    $sql = 'UPDATE news SET content = ?, title = ? WHERE id = ?';
     $content = (string) $content;
     $title = (string) $title;
 
-    $news = $this->executeRequest($sql,array($content, $title, date("Y/m/d H:i:s"), $request->getParams('newsId')));
+    $news = $this->executeRequest($sql,array($content, $title, $request->getParams('newsId')));
   }
 
-  public function deleteNews($request) {
+  public function deleteNews($newsId) {
     $sql = 'DELETE FROM news WHERE id = ?';
-    $q = $this->executeRequest($sql,array($request->getParams('newsId')));
+    $q = $this->executeRequest($sql,array($newsId));
   }
 }

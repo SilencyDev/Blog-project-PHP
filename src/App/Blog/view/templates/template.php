@@ -31,7 +31,7 @@
             <?php if ($request->getSession()->existAttribut("id")) : ?>
             <a href = connect/disconnect> Disconnect </a><br/>
                 <?php endif; ?>
-                Blog made with PHP, HTML5 et CSS.
+                Blog made with PHP, HTML5 and CSS.
             </footer>
         </div> <!-- #global -->
     </body>

@@ -45,7 +45,9 @@ class AdminController extends IsAdminController {
     public function deleteNews() {
         $newsId = $this->request->getParams("newsId");
 
+        $this->comment->deleteCommentsFromNews($newsId);
         $this->news->deleteNews($newsId);
+        $this->redirect('News');
     }
 
     Public function validCommentPage() {
@@ -57,12 +59,18 @@ class AdminController extends IsAdminController {
     }
 
     public function deleteComment() {
-        $commentId = $this->request->getParams("id"); 
+        $commentId = $this->request->getParams("commentId"); 
+        $newsId = $this->request->getParams("newsId");
 
-        $this->news->deleteComment($commentId);
+        $this->comment->deleteComment($commentId);
+        $this->redirect('News/anews/'.$newsId );
     }
 
     public function updateProfile() {
 
+    }
+
+    public function updateProfilePage() {
+        $this->createview();
     }
 }

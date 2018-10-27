@@ -27,14 +27,14 @@ class CommentManager extends Db {
   
   public function getComment($commentId) {
     $sql = 'SELECT id, newsId, userId, content, creationDate FROM comment WHERE id = ?';
-    $newsId = (int) $newsId;
-    $comments = $this->executeRequest($sql, array($newsId));
+    $commentId = (int) $newsId;
+    $comments = $this->executeRequest($sql, array($commentId));
 
     return $comments;
   }
 
   public function getValidatedComment($newsId) {
-    $sql = 'SELECT id, newsId, userId, content, creationDate FROM comment WHERE newsId = ? and validated = 1';
+    $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo FROM comment LEFT JOIN user ON comment.userId = user.id WHERE newsId = ? and validated = 1 ';
     $newsId = (int) $newsId;
     $comments = $this->executeRequest($sql, array($newsId));
 
@@ -49,13 +49,13 @@ class CommentManager extends Db {
     return $comments;
   }
 
-  public function deleteComment($request) {
+  public function deleteComment($commentId) {
     $sql = 'DELETE FROM comment WHERE id = ?';
-    $q = $this->executeRequest($sql,array($request->getParams("commentId")));
+    $q = $this->executeRequest($sql,array($commentId));
   }
 
   public function deleteCommentsFromNews($newsId) {
-    $sql = ('DELETE FROM comment WHERE newsId = '.(int) $newsId);
+    $sql = 'DELETE FROM comment WHERE newsId = ?';
     $q = $this->executeRequest($sql,array($newsId));
   }
 }
