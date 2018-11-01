@@ -42,11 +42,16 @@ class CommentManager extends Db {
   }
 
   public function getUnvalidatedComment() {
-    $sql = 'SELECT id, newsId, userId, content, creationDate FROM comment WHERE validated = 0';
-    $newsId = (int) $newsId;
-    $comments = $this->executeRequest($sql, array($newsId));
+    $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo, validated FROM comment LEFT JOIN user ON comment.userId = user.id WHERE validated = 0 ';
+    $comments = $this->executeRequest($sql, array());
 
     return $comments;
+  }
+
+  public function validComment($commentId) {
+    $sql = 'UPDATE comment SET validated = 1 WHERE id = ?';
+
+    $q = $this->executeRequest($sql,array($commentId));
   }
 
   public function deleteComment($commentId) {

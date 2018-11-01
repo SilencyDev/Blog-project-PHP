@@ -51,11 +51,17 @@ class AdminController extends IsAdminController {
     }
 
     Public function validCommentPage() {
-        $this->createView();
+        $comments = $this->comment->getUnvalidatedComment();
+        $this->createView(array('comments' => $comments));
     }
 
     Public function validComment() {
-        
+        if($this->request->getParams("validated")) {
+            $commentId = $this->request->getParams("commentId");
+            $this->comment->ValidComment($commentId);
+        }
+
+        $this->redirect('Admin/validCommentPage');
     }
 
     public function deleteComment() {
