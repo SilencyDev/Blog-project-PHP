@@ -56,7 +56,7 @@ class AdminController extends IsAdminController {
     }
 
     Public function validComment() {
-        if($this->request->getParams("validated")) {
+        if($this->request->paramsExist("validated") && $this->request->getParams("validated")) {
             $commentId = $this->request->getParams("commentId");
             $this->comment->ValidComment($commentId);
         }
