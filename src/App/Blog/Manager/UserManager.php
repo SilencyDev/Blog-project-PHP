@@ -6,12 +6,11 @@ use API\Lib\Blog\Model\Db;
 
 class UserManager extends Db {
 
-    public function addUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $profileDate) {
+    public function addUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth) {
         $sql = 'INSERT INTO user(firstName, lastName, pseudo, password, email, dateOfBirth, profileDate) VALUES(?, ?, ?, ?, ?, ?, ?)';
         $firstName = (string) $firstName;
         $lastName = (string) $lastName;
         $pseudo = (string) $pseudo;
-        $password = (string) $password;
         $email = (string) $email;
 
         $q = $this->executeRequest($sql,array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s")));
@@ -38,12 +37,12 @@ class UserManager extends Db {
     }
 
     public function emailExist($email) {
-        $sql = 'SELECT COUNT(*) FROM user WHERE email = $email';
+        $sql = 'SELECT COUNT(*) FROM user WHERE email = ?';
         return $this->executeRequest($sql,array($email))->fetchColumn();
     }
 
     public function pseudoExist($pseudo) {
-        $sql = 'SELECT COUNT(*) FROM user WHERE pseudo = $pseudo';
+        $sql = 'SELECT COUNT(*) FROM user WHERE pseudo = ?';
         return $this->executeRequest($sql,array($pseudo))->fetchColumn();
     }
     

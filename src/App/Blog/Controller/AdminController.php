@@ -71,12 +71,4 @@ class AdminController extends IsAdminController {
         $this->comment->deleteComment($commentId);
         $this->redirect('News/anews/'.$newsId );
     }
-
-    public function updateProfile() {
-
-    }
-
-    public function updateProfilePage() {
-        $this->createview();
-    }
 }

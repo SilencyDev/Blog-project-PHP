@@ -17,19 +17,21 @@ class SignInController extends Controller {
         $this->createView();
     }
 
-    public function newUser() {
+    public function addUser() {
+
         $pseudo = $this->request->getParams("pseudo");
-        $password = $this->request->password_hash(getParams("password"));
-        $password2 = $this->request->password_hash(getParams("password2"));
+        $password = $this->request->getParams("password");
+        $password2 = $this->request->getParams("password2");
         $email = $this->request->getParams("email");
         $firstName = $this->request->getParams("firstName");
         $lastName = $this->request->getParams("lastName");
         $dateOfBirth = $this->request->getParams("dateOfBirth");
 
-        if(!emailExist($email)) {
-            if(!pseudoExist($pseudo)) {
+        if(!$this->user->emailExist($email)) {
+            if(!$this->user->pseudoExist($pseudo)) {
                 if($password == $password2) {
-                    $this->user->addUser($user);
+                    $this->user->addUser($firstName, $lastName, $pseudo, password_hash($password, PASSWORD_DEFAULT), $email, $dateOfBirth);
+                    $this->redirect("Connect");
                 }
                 else {
                     throw new \Exception("Your passwords aren't the same");

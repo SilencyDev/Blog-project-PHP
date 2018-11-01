@@ -30,7 +30,7 @@ class ConnexionController extends Controller {
                     $this->request->getSession()->setAttribut($key,$value);
                     }
 
-                    $this->redirect("admin");
+                    $this->redirect("Home");
                 }
                 else {
                     $this->redirect("connect");
