@@ -16,13 +16,13 @@ class Request {
     }
 
     // return true if $params exist
-    public function paramsExist($name) {
+    public function existParams($name) {
         return (isset($this->params[$name]) && $this->params[$name] !="");
     }
 
     // return value from the parameter 
     public function getParams($name) {
-        if ($this->paramsExist($name)) {
+        if ($this->existParams($name)) {
             return $this->params[$name];
         }
         else

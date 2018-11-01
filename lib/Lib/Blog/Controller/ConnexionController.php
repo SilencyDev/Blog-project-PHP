@@ -18,8 +18,8 @@ class ConnexionController extends Controller {
     }
 
     public function connect() {
-        if($this->request->paramsExist("login") &&
-            $this->request->paramsExist("password")) {
+        if($this->request->existParams("login") &&
+            $this->request->existParams("password")) {
                 $login = $this->request->getParams("login");
                 $password = $this->request->getParams("password");
 

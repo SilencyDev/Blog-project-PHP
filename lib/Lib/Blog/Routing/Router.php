@@ -25,7 +25,7 @@ class Router {
     // Create a controller from the request
     private function newController(Request $request) {
         $controller = "home"; // default controller
-        if ($request->paramsExist('controller')) {
+        if ($request->existParams('controller')) {
             $controller = $request->getParams('controller');
             $controller = ucfirst(strtolower($controller));
         }
@@ -45,7 +45,7 @@ class Router {
     // Looking for an action to execute from the request
     private function newAction(Request $request) {
         $action = "index"; // default action
-        if ($request->paramsExist('action')) {
+        if ($request->existParams('action')) {
             $action = $request->getParams('action');
         }
         return $action;
