@@ -1,4 +1,6 @@
-<?php if(!$request->getSession()->existAttribut("id")) : ?>
+<?php $this->title = "Log In";
+
+if(!$request->getSession()->existAttribut("id")) : ?>
         
         <form method="post" action="Connect/connect">
             <input id="login" name="login" placeholder="Your login (e-mail)" required><br />

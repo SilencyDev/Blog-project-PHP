@@ -34,12 +34,17 @@ class AdminController extends IsAdminController {
             $this->redirect('News');
     }
 
+    public function updateNewsPage() {
+        $this->createView();
+    }
+
     public function updateNews() {
             $content = $this->request->getParams("content");
             $title = $this->request->getParams("title");
+            $newsId = $this->request->getParams("newsId");
 
-            $this->news->UpdateNews($content, $title, $this->request);
-            $this->redirect('Admin');
+            $this->news->UpdateNews($content, $title, $newsId);
+            $this->redirect('News/aNews/'.$newsId);
     }
 
     public function deleteNews() {

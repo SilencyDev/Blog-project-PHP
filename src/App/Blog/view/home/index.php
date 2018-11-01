@@ -1,4 +1,4 @@
-<?php
+<?php $this->title = "Home";
 
 
 $pswd = "hello";

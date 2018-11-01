@@ -1,4 +1,4 @@
-<?php $this->title = "Mon Blog"; ?>
+<?php $this->title = "Blog"; ?>
 
 <?php foreach ($news as $aNews):
     ?>

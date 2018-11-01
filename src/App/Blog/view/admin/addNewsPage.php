@@ -1,4 +1,4 @@
-<?php ?>
+<?php $this->title = "Add a News"?>
 
 <form method="post" action="Admin/addNews">
     <input id="title" name="title" placeholder="title" required><br />

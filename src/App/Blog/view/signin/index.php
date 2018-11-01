@@ -1,4 +1,4 @@
-<?php ?>
+<?php $this->title = "Sign in" ?>
 
 <form method="post" action="signin/addUser">
     <input name="pseudo" placeholder="Pseudo" required><br />
