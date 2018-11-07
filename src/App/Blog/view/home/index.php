@@ -1,5 +1,4 @@
-<?php $this->title = "Home";
+<?php $this->title = "Home"; ?>
 
-
-$pswd = "hello";
-print_R($pswd);
+Kévin Macquet, 
+catchphrase 
