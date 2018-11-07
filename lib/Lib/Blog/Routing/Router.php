@@ -10,6 +10,8 @@ class Router {
     public function routerRequest() {
         try {
             // Regroup POST and GET into the request
+            $this->clear($_POST);
+            $this->clear($_GET);
             $request = new Request(array_merge($_POST, $_GET));
 
             $controller = $this->newController($request);
@@ -51,13 +53,15 @@ class Router {
         return $action;
     }
 
-    public function userError() {
-        ;
-    }
-
     // Display an error
     private function manageError(\Exception $exception) {
         $view = new View('/error/index');
         $view->create(array('errorMsg' => $exception->getMessage()));
+    }
+
+    public function clear(&$array) {
+        array_walk($array, function($value, $key) {
+            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+        });
     }
 }

@@ -51,8 +51,4 @@ class View {
             throw new \Exception("'$viewFile' file is not found");
         }
     }
-
-    public function clear($value) {
-        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
-    }
 }
