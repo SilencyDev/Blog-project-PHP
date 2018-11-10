@@ -14,5 +14,7 @@
             "API\\App\\" : "src/App/",
             "API\\Lib\\" : "lib/Lib/"}
     },
-    "require": {}
+    "require": {
+        "swiftmailer/swiftmailer": "6.0"
+    }
 }
