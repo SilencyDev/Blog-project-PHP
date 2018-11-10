@@ -1,1 +1,1 @@
-<p><?= $this->clear($errorMsg) ?></p>
+<p><?= $errorMsg ?></p>
