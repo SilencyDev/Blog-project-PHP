@@ -3,7 +3,10 @@
 <article>
     <header>
         <h1><?= $aNews['title'] ?></h1>
-        <time> Created <?= date('d/m/Y H:i:s', strtotime($aNews['creationDate'])) ?></time>     <time> Updated <?= date('d/m/Y H:i:s', strtotime($aNews['updateDate'])) ?></time>
+        <time> Created <?= date('d/m/Y \a\t H\hi', strtotime($aNews['creationDate'])) ?></time>
+        <?php if(!$aNews['updateDate'] === false) : ?>
+            <Br/><time> Updated <?= date('d/m/Y \a\t H\hi', strtotime($aNews['updateDate'])) ?></time>
+        <?php endif; ?>
     </header>
     <p><?= $aNews['content'] ?></p>
         <?php if($request->getSession()->existAttribut('administrator') && $request->getSession()->getAttribut('administrator')) : ?>
@@ -26,9 +29,11 @@
 <?php foreach ($comments as $comment): ?>
     <p><?= $comment['pseudo'] ?> comment :</p>
     <p><?= $comment['content'] ?></p>
-    <?php if($request->getSession()->existAttribut('id') && $request->getSession()->getAttribut('id') == $comment['userId']) : ?>
+    <p><?= date('d/m/Y \a\t H\hi', strtotime($comment['creationDate'])) ?></p>
+    <?php if($request->getSession()->existAttribut('id') && $request->getSession()->getAttribut('id') == $comment['userId'] 
+        || $request->getSession()->existAttribut('administrator') && $request->getSession()->getAttribut('administrator')) : ?>
         <form method="post" action="admin/deleteComment">
-            <input type="hidden" name="newsId" value="<?= $aNews['id'] ?>" />
+            <input type="hidden" name="newsId" value="<?= $comment['newsId'] ?>" />
             <input type="hidden" name="commentId" value="<?= $comment['id'] ?>" />
             <input type="submit" value="Delete comment" />
         </form>

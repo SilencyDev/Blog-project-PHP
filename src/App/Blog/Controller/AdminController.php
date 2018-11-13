@@ -70,10 +70,18 @@ class AdminController extends IsAdminController {
     }
 
     public function deleteComment() {
-        $commentId = $this->request->getParams("commentId"); 
+        $commentId = $this->request->getParams("commentId");
         $newsId = $this->request->getParams("newsId");
 
         $this->comment->deleteComment($commentId);
-        $this->redirect('News/anews/'.$newsId );
+        $this->redirect('News/anews/'.$newsId); 
+    }
+
+    public function deleteCommentToValid() {
+        $commentId = $this->request->getParams("commentId");
+        $newsId = $this->request->getParams("newsId");
+
+        $this->comment->deleteComment($commentId);
+        $this->redirect('Admin/validCommentPage/'); 
     }
 }

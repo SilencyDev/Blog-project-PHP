@@ -34,7 +34,7 @@ class CommentManager extends Db {
   }
 
   public function getValidatedComment($newsId) {
-    $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo FROM comment LEFT JOIN user ON comment.userId = user.id WHERE newsId = ? and validated = 1 ';
+    $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo FROM comment LEFT JOIN user ON comment.userId = user.id WHERE newsId = ? and validated = 1 ORDER BY id DESC';
     $newsId = (int) $newsId;
     $comments = $this->executeRequest($sql, array($newsId));
 
@@ -42,7 +42,7 @@ class CommentManager extends Db {
   }
 
   public function getUnvalidatedComment() {
-    $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo, validated FROM comment LEFT JOIN user ON comment.userId = user.id WHERE validated = 0 ';
+    $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo, validated FROM comment LEFT JOIN user ON comment.userId = user.id WHERE validated = 0 ORDER BY id ASC';
     $comments = $this->executeRequest($sql, array());
 
     return $comments;
