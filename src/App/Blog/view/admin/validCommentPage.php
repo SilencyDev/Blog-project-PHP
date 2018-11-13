@@ -4,17 +4,22 @@
     ?>
     <article>
         <header>
-            <a href="<?= "news/aNews/" . $this->clear($comment['newsId']) ?>">
-                <h1><?= $this->clear($comment['pseudo']) ?></h1>
+            <a href="<?= "news/aNews/" . $comment['newsId'] ?>">
+                <h1><?= $comment['pseudo'] ?></h1>
             </a>
-            <time><?= $this->clear($comment['creationDate']) ?></time>
+            <time><?= date('d/m/Y \a\t H\hi', strtotime($comment['creationDate'])) ?></time>
         </header>
-            <p><?= $this->clear($comment['content']) ?>...</p>
+            <p><?= $comment['content'] ?></p>
         <form method="post" action="Admin/validComment">
             <label> Validated? </label>
             <input type="checkbox" name="validated"/>
             <input type="hidden" name="commentId" value="<?= $comment['id'] ?>"/>
             <input type="submit" value="submit"/>
+        </form>
+        <form method="post" action="admin/deleteCommentToValid">
+            <input type="hidden" name="newsId" value="<?= $comment['newsId'] ?>" />
+            <input type="hidden" name="commentId" value="<?= $comment['id'] ?>" />
+            <input type="submit" value="Delete comment" />
         </form>
     </article>
     <hr />

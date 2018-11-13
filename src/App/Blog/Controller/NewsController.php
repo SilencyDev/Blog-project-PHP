@@ -36,7 +36,7 @@ class NewsController extends Controller {
             $newsId =  $this->request->getParams("newsId");
             $this->comment->addComment($content, $newsId, $this->request);
 
-            $this->executeAction("index");
+            $this->redirect("News/aNews/".$newsId);
         }
         else {
             $this->redirect("connect");
