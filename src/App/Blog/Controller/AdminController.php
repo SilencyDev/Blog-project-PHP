@@ -74,7 +74,7 @@ class AdminController extends IsAdminController {
         $newsId = $this->request->getParams("newsId");
 
         $this->comment->deleteComment($commentId);
-        $this->redirect('News/anews/'.$newsId); 
+        $this->redirect('News/anews/'.$newsId);
     }
 
     public function deleteCommentToValid() {
