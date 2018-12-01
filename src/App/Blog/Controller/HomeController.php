@@ -18,7 +18,7 @@ class HomeController extends Controller {
             $email = $this->request->getParams('email');
             $content = $this->request->getParams('content');
             $content = 'full name: '.$firstName.' '.$lastName.'
-            Email: '.$email.' 
+            Email: '.$email.'
             Message: '.$content;
 
             $mailUsername = Configuration::get('mailUsername');

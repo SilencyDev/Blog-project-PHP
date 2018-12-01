@@ -1,40 +1,40 @@
-<?php $this->title = "News - " . $aNews['title']; ?>
+<?php foreach($aNews as $news):  endforeach; $this->title = "News - " .$news->getTitle(); ?>
 
 <article>
     <header>
-        <h1><?= $aNews['title'] ?></h1>
-        <time> Created <?= date('d/m/Y \a\t H\hi', strtotime($aNews['creationDate'])) ?></time>
-        <?php if(!$aNews['updateDate'] === false) : ?>
-            <Br/><time> Updated <?= date('d/m/Y \a\t H\hi', strtotime($aNews['updateDate'])) ?></time>
+        <h1><?= $news->getTitle() ?></h1>
+        <time> Created <?= date('d/m/Y \a\t H\hi', strtotime($news->getCreationDate())) ?></time>
+        <?php if(!$news->getUpdateDate() === false) : ?>
+            <Br/><time> Updated <?= date('d/m/Y \a\t H\hi', strtotime($news->getUpdateDate())) ?></time>
         <?php endif; ?>
     </header>
-    <p><?= $aNews['content'] ?></p>
+    <p><?= $news->getContent() ?></p>
         <?php if($request->getSession()->existAttribut('administrator') && $request->getSession()->getAttribut('administrator')) : ?>
             <form method="post" action="admin/updateNewsPage">
-                <input type="hidden" name="newsId" value="<?= $aNews['id'] ?>" />
-                <input type="hidden" name="title" value="<?= $aNews['title'] ?>" />
-                <input type="hidden" name="content" value="<?= $aNews['content'] ?>" />
+                <input type="hidden" name="newsId" value="<?= $news->getId() ?>" />
+                <input type="hidden" name="title" value="<?= $news->getTitle() ?>" />
+                <input type="hidden" name="content" value="<?= $news->getContent() ?>" />
                 <input type="submit" value="Edit" />
             </form>
             <form method="post" action="admin/deleteNews">
-                <input type="hidden" name="newsId" value="<?= $aNews['id'] ?>" />
+                <input type="hidden" name="newsId" value="<?= $news->getId() ?>" />
                 <input type="submit" value="Delete" />
             </form>
     <?php endif; ?>
 </article>
 <hr />
 <header>
-    <h1>Answer to <?= $aNews['title'] ?></h1>
+    <h1>Answer to <?= $news->getTitle() ?></h1>
 </header>
 <?php foreach ($comments as $comment): ?>
-    <p><?= $comment['pseudo'] ?> comment :</p>
-    <p><?= $comment['content'] ?></p>
-    <p><?= date('d/m/Y \a\t H\hi', strtotime($comment['creationDate'])) ?></p>
-    <?php if($request->getSession()->existAttribut('id') && $request->getSession()->getAttribut('id') == $comment['userId'] 
+    <p><?= $comment->getPseudo() ?> comment :</p>
+    <p><?= $comment->getContent() ?></p>
+    <p><?= date('d/m/Y \a\t H\hi', strtotime($comment->getCreationDate())) ?></p>
+    <?php if($request->getSession()->existAttribut('id') && $request->getSession()->getAttribut('id') == $comment->getUserId() 
         || $request->getSession()->existAttribut('administrator') && $request->getSession()->getAttribut('administrator')) : ?>
         <form method="post" action="admin/deleteComment">
-            <input type="hidden" name="newsId" value="<?= $comment['newsId'] ?>" />
-            <input type="hidden" name="commentId" value="<?= $comment['id'] ?>" />
+            <input type="hidden" name="newsId" value="<?= $comment->getNewsId() ?>" />
+            <input type="hidden" name="commentId" value="<?= $comment->getId() ?>" />
             <input type="submit" value="Delete comment" />
         </form>
     <?php endif; ?>
@@ -42,11 +42,9 @@
 <hr />
 
 <?php if($request->getSession()->existAttribut("id")) : ?>
-        
-        <form method="post" action="news/addComment">
-            <input type="hidden" name="newsId" value="<?= $aNews['id'] ?>" />
-            <textarea id="content" name="content" rows="4" 
-                      placeholder="Your comment" required></textarea><br />
+        <form class="form-signin" method="post" action="news/addComment">
+            <input type="hidden" name="newsId" value="<?= $news->getId() ?>" />
+            <textarea id="content" name="content" rows="4" placeholder="Your comment" required></textarea>
             <input type="submit" value="Comment" />
         </form>
 <?php endif; ?>

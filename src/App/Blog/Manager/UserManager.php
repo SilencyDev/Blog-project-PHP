@@ -3,66 +3,57 @@
 namespace API\App\Blog\Manager;
 
 use API\Lib\Blog\Model\Db;
+use API\App\Blog\Entity\User;
+use API\App\Blog\Repository\GetUserRepository;
+use API\App\Blog\Factory\GetUserDTOFactory;
+use API\App\Blog\Repository\GetDeleteUserRepository;
+use API\App\Blog\Repository\GetUpdateUserRepository;
+use API\App\Blog\Repository\GetAddUserRepository;
+use API\App\Blog\Repository\GetUserHashVerifyRepository;
+use API\App\Blog\Repository\GetEmailExistRepository;
+use API\App\Blog\Repository\GetPseudoExistRepository;
 
 class UserManager extends Db {
 
-    public function addUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth) {
-        $sql = 'INSERT INTO user(firstName, lastName, pseudo, password, email, dateOfBirth, profileDate) VALUES(?, ?, ?, ?, ?, ?, ?)';
-        $firstName = (string) $firstName;
-        $lastName = (string) $lastName;
-        $pseudo = (string) $pseudo;
-        $email = (string) $email;
+    public function addUser(string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth) {
+        $repo = new GetAddUserRepository();
 
-        $q = $this->executeRequest($sql,array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s")));
+        $repo->getAddUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth);
     }
 
-    public function updateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $profileDate, $request) {
-        $q = 'UPDATE user SET imageId = ?, firstName = ?, lastName = ?, pseudo = ?, password = ?, email = ?, dateOfBirth = ?, administrator = ? WHERE id =?';
-        $imageId = (int) $imageId;
-        $firstName = (string) $firstName;
-        $lastName = (string) $lastName;
-        $pseudo = (string) $pseudo;
-        $password = (string) $password;
-        $email = (string) $email;
-        $administrator = (boolean) $administrator;
+    public function updateUser(int $imageId, string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth, boolean $administrator, $profileDate, $request) {
+        $repo = new GetUpdateUserRepository();
 
-        $q = $this->executeRequest($sql,array($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s"), $request->getSession()->getAttribut('id')));
+        $repo->getUpdateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request);
     }
 
-    public function deleteUser($userId) {
-        $sql = ('DELETE FROM user WHERE id = '.(int) $userId);
-        $q = $this->executeRequest($sql,array($userId));
+    public function deleteUser(int $userId) {
+        $repo = new GetDeleteUserRepository();
 
-        return $q;
+        $repo->getDeleteUser($userId);
     }
 
-    public function emailExist($email) {
-        $sql = 'SELECT COUNT(*) FROM user WHERE email = ?';
-        return $this->executeRequest($sql,array($email))->fetchColumn();
+    public function emailExist(string $email) {
+        $repo = new GetEmailExistRepository();
+
+        return $repo->getEmailExist($email);
     }
 
-    public function pseudoExist($pseudo) {
-        $sql = 'SELECT COUNT(*) FROM user WHERE pseudo = ?';
-        return $this->executeRequest($sql,array($pseudo))->fetchColumn();
+    public function pseudoExist(string $pseudo) {
+        $repo = new GetPseudoExistRepository();
+
+        return $repo->getPseudoExist($pseudo);
     }
     
-	public function userHashVerify($login, $password) {
-		$sql = "SELECT password FROM user WHERE email = (?)";
-		$passwordHash = $this->executeRequest($sql, array($login));
-		$passwordHash = $passwordHash->fetch();
-		$passwordHash = $passwordHash["password"];
-
-		return password_verify($password, $passwordHash);
+	public function userHashVerify(string $login, string $password) {
+        $repo = new GetUserHashVerifyRepository();
+        
+        return $repo->getUserHashVerify($login, $password);
 	}
 
     public function getUser($login) {
-        $sql = "SELECT id, email , password, imageId, firstName, lastName, pseudo, 
-			dateOfBirth, administrator, profileDate FROM user WHERE email=?";
-        $user = $this->executeRequest($sql, array($login));
-        if ($user->rowcount() == 1) {
-			return $user->fetch();
-		}
-        else
-            throw new \Exception("Your login or password is incorrect");
+        $repo = new GetUserRepository();
+        
+        return $repo->getUser($login);
     }
 }
