@@ -3,58 +3,59 @@
 namespace API\App\Blog\Manager;
 
 use API\Lib\Blog\Model\Db;
+use API\App\Blog\Entity\News;
+use API\App\Blog\Repository\GetANewsRepository;
+use API\App\Blog\Factory\GetANewsDTOFactory;
+use API\App\Blog\Repository\GetNewsRepository;
+use API\App\Blog\Factory\GetNewsDTOFactory;
+use API\App\Blog\Repository\GetUpdateNewsRepository;
+use API\App\Blog\Repository\GetDeleteNewsRepository;
+use API\App\Blog\Repository\GetAddNewsRepository;
+use API\App\Blog\Repository\GetCountNewsRepository;
 
 class NewsManager extends Db {
 
   public function countNews() {
-    $sql = 'SELECT count(*) FROM news';
+    $repo = new GetCountNewsRepository();
 
-    $countNews = $this->executeRequest($sql)->fetchColumn();
+    $count = $repo->getCountNews();
 
     return $countNews;
   }
 
   public function getNews() {
-    $sql = 'SELECT id, userId, title, content, creationDate, updateDate, category FROM news ORDER BY id DESC';
-    
-    $news = $this->executeRequest($sql);
+    $repo = new GetNewsRepository();
+    $factory = new GetNewsDTOFactory();
 
+    $news = $factory->createFromRepository($repo->getNews());
+    
     return $news;
   }
 
-  public function getUniqueNews($newsId) {
-    $sql = "SELECT id, userId, title, content, creationDate, updateDate, category FROM news WHERE id = ?";
-    $newsId = (int) $newsId;
-
-    $aNews = $this->executeRequest($sql,array($newsId));
-    if ($aNews->rowcount() > 0) {
-      return $aNews->fetch();
-    }
-    else {
-      throw new \Exception("There is no news relative to '$newsId' ID");
-    }
+  public function getUniqueNews(int $newsId) {
+    $repo = new GetANewsRepository();
+    $factory = new GetANewsDTOFactory();
+    
+    $aNews = $factory->createFromRepository($repo->getANews($newsId));
+    
+    return $aNews;
   }
 
-  public function addNews($title, $content, $request) {
-    $sql = ('INSERT INTO news(title, content, userId, creationDate) VALUES(?, ?, ?, ?)');
-    $title = (string) $title;
-    $content = (string) $content;
+  public function addNews(string $title, string $content, int $userId) {
+    $repo = new GetAddNewsRepository();
 
-    $news = $this->executeRequest($sql,array($title, $content, $request->getSession()->getAttribut("id"), date("Y/m/d H:i:s")));
-
+    $repo->getAddNews($title, $content, $userId);
   }
 
-  public function updateNews($content, $title, $newsId) {
-    $sql = 'UPDATE news SET content = ?, title = ?, updateDate = ? WHERE id = ?';
-    $content = (string) $content;
-    $title = (string) $title;
-    $newsId = (int) $newsId;
+  public function updateNews(string $content, string $title, int $newsId) {
+    $repo = new GetUpdateNewsRepository();
 
-    $news = $this->executeRequest($sql,array($content, $title, date('Y/m/d H:i:s'), $newsId));
+    $repo->getUpdateNews($content, $title, $newsId);
   }
 
-  public function deleteNews($newsId) {
-    $sql = 'DELETE FROM news WHERE id = ?';
-    $q = $this->executeRequest($sql,array($newsId));
+  public function deleteNews(int $newsId) {
+    $repo = new GetDeleteNewsRepository();
+
+    $repo->getDeleteNews($newsId);
   }
 }

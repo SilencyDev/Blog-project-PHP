@@ -3,29 +3,29 @@
 namespace API\App\Blog\Controller;
 
 use API\Lib\Blog\Controller\Controller;
-use API\App\Blog\Entity\Comment;
-use API\App\Blog\Entity\News;
+use API\App\Blog\Manager\CommentManager;
+use API\App\Blog\Manager\NewsManager;
 
 class NewsController extends Controller {
 
-    private $news;
-    private $comment;
+    protected $newsManager;
+    protected $commentManager;
 
     public function __construct() {
-        $this->news = new News();
-        $this->comment = new Comment();
+        $this->newsManager = new NewsManager();
+        $this->commentManager = new CommentManager();
     }
 
     Public function index() {
-        $news = $this->news->getNews();
+        $news = $this->newsManager->getNews();
         $this->createView(array('news' => $news));
     }
 
     Public function aNews() {
         $newsId = $this->request->getParams("id");
 
-        $aNews = $this->news->getUniqueNews($newsId);
-        $comments = $this->comment->getValidatedComment($newsId);
+        $aNews = $this->newsManager->getUniqueNews($newsId);
+        $comments = $this->commentManager->getValidatedComment($newsId);
 
         $this->createView(array('aNews' => $aNews, 'comments' => $comments));
     }
@@ -33,8 +33,9 @@ class NewsController extends Controller {
     public function addComment() {
         if($this->request->getSession()->existAttribut("id")) {
             $content = $this->request->getParams("content");
-            $newsId =  $this->request->getParams("newsId");
-            $this->comment->addComment($content, $newsId, $this->request);
+            $newsId = $this->request->getParams("newsId");
+            $userId = $this->request->getParams("id");
+            $this->commentManager->addComment($newsId, $userId, $content);
 
             $this->redirect("News/aNews/".$newsId);
         }

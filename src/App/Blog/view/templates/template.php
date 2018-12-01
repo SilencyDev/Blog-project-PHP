@@ -3,24 +3,47 @@
     <head>
         <meta charset="UTF-8" />
         <base href="<?= $webRoot ?>" >
- 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!-- <link rel="stylesheet" href="<?= $webRoot ?>web/css/style2.css" type="text/css"> -->
         <title><?= $title ?></title>
     </head>
     <body>
         <div id="global"> <!-- #global -->
             <header>
-                <a href="home/index">Home</a>
-                <a href="News/index">News</a>
+                <nav role="navigation">
+                    <div id="menuToggle">
+                        <input type="checkbox" />
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        <ul id="menu">
+                <a href="home/index">
+                    <li>Home</li>
+                </a>
+                <a href="News/index">
+                    <li>News</li>
+                </a>
                 <?php if(!$request->getSession()->existAttribut("id")) : ?>
-                    <a href="Connect/index">Log in</a>
-                    <a href="SignIn/index">Sign up</a>
+                    <a href="Connect/index">
+                        <li>Log in</li>
+                    </a>
+                    <a href="SignIn/index">
+                        <li>Sign up</li>
+                    </a>
                 <?php endif; ?>
-                <?php if($request->getSession()->existAttribut("id") && $request->getSession()->getAttribut("administrator")) : ?>
-                    <a href="Admin/addNewsPage">Add a news</a>
-                    <a href="Admin/validCommentPage">Validation</a>
+                <?php if($request->getSession()->existAttribut("administrator") && $request->getSession()->getAttribut("administrator")) : ?>
+                    <a href="Admin/addNewsPage">
+                        <li>Add a news</li>
+                    </a>
+                    <a href="Admin/validCommentPage">
+                        <li>Validation</li>
+                    </a>
                 <?php endif; ?>
-                <p>Welcome to my personal blog.</p>
+                        </ul>
+                    </div>
+                </nav>
             </header>
+            <br/><br/>
             <div id="error"> <!-- #error -->
                 <?php if(isset( $_SESSION['error']) && $_SESSION['error'] != "") :
                   echo  $_SESSION['error'];
@@ -32,11 +55,10 @@
                 <?= $content ?>
                 <br/>
             </div><br/> <!-- #content -->
-            <footer id="footer">
+            <footer id="foot">
             <?php if($request->getSession()->existAttribut("id")) : ?>
             <a href = connect/disconnect> Disconnect </a><br/>
                 <?php endif; ?>
-                Blog made with PHP, HTML5 and CSS.
             </footer>
         </div> <!-- #global -->
     </body>

@@ -3,14 +3,11 @@
 namespace API\Lib\Blog\Controller;
 
 use API\Lib\Blog\Controller\Controller;
-use API\App\Blog\Entity\User;
+use API\App\Blog\Manager\UserManager;
 
 class ConnexionController extends Controller {
-
-    protected $user;
-
     public function __construct() {
-        $this->user = new User();
+        $this->userManager = new UserManager();
     }
 
     public function index() {
@@ -18,27 +15,25 @@ class ConnexionController extends Controller {
     }
 
     public function connect() {
-        if($this->request->existParams("login") &&
-            $this->request->existParams("password")) {
-                $login = $this->request->getParams("login");
-                $password = $this->request->getParams("password");
+        if($this->request->existParams("login") && $this->request->existParams("password")) {
+            $login = $this->request->getParams("login");
+            $password = $this->request->getParams("password");
 
-                if($this->user->userHashVerify($login, $password)) {
-                    $user = $this->user->getUser($login);
-
-                    foreach($user as $key => $value) {
-                    $this->request->getSession()->setAttribut($key,$value);
-                    }
-
-                    $this->redirect("Home");
+            if($this->userManager->userHashVerify($login, $password)) {
+                $user = $this->userManager->getUser($login);
+                
+                foreach($user as $key => $value) {
+                $this->request->getSession()->setAttribut($key,$value);
                 }
-                else {
-                    $this->redirect("connect");
-                    $_SESSION['error'] = "Your login or password is incorrect";
-                }
+                $this->redirect("Home");
             }
-            else
-                throw new \Exception("Impossible Action : login or password not defined");
+            else {
+                $this->redirect("connect");
+                $_SESSION['error'] = "Your login or password is incorrect";
+            }
+        }
+        else
+            throw new \Exception("Impossible Action : login or password not defined");
     }
 
     public function disconnect() {

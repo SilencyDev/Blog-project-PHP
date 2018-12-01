@@ -1,12 +1,10 @@
 <?php
 
-namespace API\App\Blog\Entity;
+namespace API\App\Blog\DTO;
 
-use API\App\Blog\Manager\UserManager;
+class GetUserDTO implements DTOInterface {
 
-class User extends UserManager {
-
-	private $id;
+    private $id;
 	private $imageId;
 	private $firstName;
 	private $lastName;
@@ -87,31 +85,31 @@ class User extends UserManager {
 		return $this;
 	}
 
-	public function getDateOfBirth() :\DateTime {
+	public function getDateOfBirth() {
 		return $this->dateOfBirth;
 	}
 
-	public function setDateOfBirth(\DateTime $dateOfBirth) :self {
+	public function setDateOfBirth($dateOfBirth) :self {
 		$this->dateOfBirth = $dateOfBirth;
 
 		return $this;
 	}
 
-	public function getAdministrator() {
+	public function getAdministrator() :bool{
 		return $this->administrator;
 	}
 
-	public function setAdministrator($administrator) :self {
+	public function setAdministrator(bool $administrator) :self {
 		$this->administrator = $administrator;
 
 		return $this;
 	}
 
-	public function getProfileDate() :\DateTime {
+	public function getProfileDate() {
 		return $this->profileDate;
 	}
 
-	public function setProfileDate(\DateTime $profileDate) :self {
+	public function setProfileDate($profileDate) :self {
 		$this->profileDate = $profileDate;
 
 		return $this;

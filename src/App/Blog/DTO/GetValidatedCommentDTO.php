@@ -1,18 +1,15 @@
 <?php
 
-namespace API\App\Blog\Entity;
+namespace API\App\Blog\DTO;
 
-use API\App\Blog\Manager\CommentManager;
-
-class Comment extends CommentManager {
+class GetValidatedCommentDTO implements DTOInterface  {
 
 	private $id;
-	private $userId;
+    private $userId;
+    private $pseudo;
 	private $creationDate;
-	private $updateDate;
 	private $content;
 	private $newsId;
-	private $validated;
 
 	public function getId() :int {	
 		return $this->id;
@@ -32,6 +29,16 @@ class Comment extends CommentManager {
 		$this->userId = $userId;
 
 		return $this;
+    }
+    
+    public function getPseudo() :string {	
+		return $this->pseudo;
+	}
+
+	public function setPseudo(string $pseudo) :self {
+		$this->pseudo = $pseudo;
+
+		return $this;
 	}
 
 	public function getCreationDate() {	
@@ -40,16 +47,6 @@ class Comment extends CommentManager {
 	
 	public function setCreationDate($creationDate) :self {	
 		$this->position = $creationDate;
-
-		return $this;
-	}
-
-	public function getUpdateDate() {	
-		return $this->updateDate;
-	}
-	
-	public function setUpdateDate( $updateDate) :self {
-		$this->position = $updateDate;
 
 		return $this;
 	}
@@ -70,16 +67,6 @@ class Comment extends CommentManager {
 	
 	public function setNewsId(int $newsId) :self {	
 		$this->newsId = $newsId;
-
-		return $this;
-	}
-
-	public function getValidated() :boolean {
-		return $this->validated;
-	}
-
-	public function setValidated(boolean $validated) :self {	
-		$this->validated = $validated;
 
 		return $this;
 	}

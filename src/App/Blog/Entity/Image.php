@@ -6,15 +6,15 @@ use API\App\Blog\Manager\ImageManager;
 
 class Image extends ImageManager {
 
-	protected $id;
-	protected $url;
-	protected $name;
+	private $id;
+	private $url;
+	private $name;
 
-	public function getId() :integer {
+	public function getId() :int {
 		return $this->id;
 	}
 
-	public function setId(integer $id) :self {
+	public function setId(int $id) :self {
 		$this->id = $id;
 
 		return $this;

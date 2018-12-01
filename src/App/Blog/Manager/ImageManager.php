@@ -3,26 +3,28 @@
 namespace API\App\Blog\Manager;
 
 use API\Lib\Blog\Model\Db;
+use API\App\Blog\Entity\Image;
+use API\App\Blog\Repository\GetAddImageRepository;
+use API\App\Blog\Repository\GetUpdateImageRepository;
+use API\App\Blog\Repository\GetDeleteImageRepository;
 
 class ImageManager extends Db {
     
-    public function addImage($url, $name) {
-        $sql = 'INSERT INTO image(url, name) VALUES(?, ?)';
-        $url = (string) $url;
-        $name = (string) $name;
+    public function addImage(string $url, string $name) {
+        $repo = new GetAddImageRepository();
 
-        $q = $this->executeRequest($sql,array($url, $name));
+        $repo->getAddImage($url, $name);
     }
 
-    public function updateImage($url, $name, $request) {
-        $sql = 'UPDATE image SET url = ?, name = ? WHERE imageId =?';
+    public function updateImage(string $url, string $name, int $imageId) {
+        $repo = new GetUpdateImageRepository();
 
-        $q = $this->executeRequest($sql,array($url, $name, $request->getParams("imageId")));
+        $repo->getUpdateImage($url, $name, $imageId);
     }
 
-    public function deleteImage($request) {
-        $sql = 'DELETE FROM image WHERE id = ?';
-        
-        $q = $this->executeRequest($sql,array($request->getParams("imageId")));
+    public function deleteImage(int $imageId) {
+        $repo = new GetDeleteImageRepository();
+
+        $repo->getDeleteImage($imageId);
     }
 }

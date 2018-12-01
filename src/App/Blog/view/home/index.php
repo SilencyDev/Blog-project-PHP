@@ -2,6 +2,7 @@
 
 Kévin Macquet<Br/> 
 catchphrase<Br/><Br/>
+<a href = "https://drive.google.com/open?id=1emBqUk73JutgtGrhRabsTrUcHfoJ6PQK"> Lien CV </a><Br/><Br/>
 Contact me
 <form method="post" action="home/sendMail">
     <input name="firstName" placeholder="First Name" required><br />

@@ -1,11 +1,8 @@
 <?php
 
-namespace API\App\Blog\Entity;
+namespace API\App\Blog\DTO;
 
-use API\App\Blog\Manager\NewsManager;
-use API\App\Blog\Entity\Entity;
-
-class News extends Entity {
+class GetANewsDTO implements DTOInterface {
 
 	private $id;
 	private $userId;
