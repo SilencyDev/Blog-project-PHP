@@ -51,7 +51,7 @@ class UserManager extends Db {
         return $repo->getUserHashVerify($login, $password);
 	}
 
-    public function getUser($login) {
+    public function getUser(string $login) {
         $repo = new GetUserRepository();
         
         return $repo->getUser($login);

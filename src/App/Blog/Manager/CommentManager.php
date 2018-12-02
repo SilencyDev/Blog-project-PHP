@@ -26,18 +26,11 @@ class CommentManager extends Db {
     return $countComment;
   }
 
-  public function addComment($newsId, $userId, $content) {
+  public function addComment(int $newsId, int $userId, string $content) {
     $repo = new GetAddCommentRepository();
 
     $repo->getAddComment($newsId, $userId, $content);
   }
-
-  public function updateComment($content, $request) {
-    $repo = new GetUpdateCommentRepository();
-
-    $repo->getUpdateComment($content, $request);
-  }
-
 
   public function getValidatedComment(int $newsId) {
     $repo = new GetValidatedCommentRepository();

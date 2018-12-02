@@ -3,6 +3,7 @@
 namespace API\App\Blog\Controller;
 
 use API\Lib\Blog\Controller\Controller;
+use API\Lib\Blog\Config\Configuration;
 use API\App\Blog\Manager\CommentManager;
 use API\App\Blog\Manager\NewsManager;
 
@@ -34,7 +35,7 @@ class NewsController extends Controller {
         if($this->request->getSession()->existAttribut("id")) {
             $content = $this->request->getParams("content");
             $newsId = $this->request->getParams("newsId");
-            $userId = $this->request->getParams("id");
+            $userId = $this->request->getSession()->getAttribut("id");
             $this->commentManager->addComment($newsId, $userId, $content);
 
             $this->redirect("News/aNews/".$newsId);
