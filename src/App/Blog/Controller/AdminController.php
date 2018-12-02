@@ -3,6 +3,7 @@
 namespace API\App\Blog\Controller;
 
 use API\App\Blog\Controller\IsAdminController;
+use API\Lib\Blog\Config\Configuration;
 use API\App\Blog\Manager\NewsManager;
 use API\App\Blog\Manager\CommentManager;
 use API\App\Blog\Manager\ImageManager;

@@ -6,8 +6,8 @@ use API\Lib\Blog\Model\Db;
 
 class GetValidCommentRepository extends Db {
     public function getValidComment($commentId) {
-        $sql = 'UPDATE comment SET validated = 1 WHERE id = ?';
+    $sql = 'UPDATE comment SET validated = 1 WHERE id = ?';
 
-        $q = $this->executeRequest($sql,array($commentId));
+    $q = $this->executeRequest($sql,array($commentId));
     }
 }

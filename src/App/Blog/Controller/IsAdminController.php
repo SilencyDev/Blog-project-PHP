@@ -3,6 +3,7 @@
 namespace API\App\Blog\Controller;
 
 use API\Lib\Blog\Controller\Controller;
+use API\Lib\Blog\Config\Configuration;
 
 abstract class IsAdminController extends Controller {
 
