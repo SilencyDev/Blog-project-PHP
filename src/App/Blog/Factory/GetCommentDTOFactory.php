@@ -3,13 +3,13 @@
 namespace API\App\Blog\Factory;
 
 use API\App\Blog\Factory\DTOInterface;
-use API\App\Blog\DTO\GetUnvalidatedCommentDTO;
+use API\App\Blog\DTO\GetCommentDTO;
 
-class GetunValidatedCommentDTOFactory implements DTOFactoryInterface {
+class GetCommentDTOFactory implements DTOFactoryInterface {
     public function createFromRepository(array $data) {
         $array = [];
         foreach($data as $aData) {
-            $dto = new GetunValidatedCommentDTO();
+            $dto = new GetCommentDTO();
 
             $dto->setId($aData["id"]);
             $dto->setUserId($aData["userId"]);
@@ -18,7 +18,6 @@ class GetunValidatedCommentDTOFactory implements DTOFactoryInterface {
             $dto->setContent($aData["content"]);
             $dto->setNewsId($aData["newsId"]);
             
-
             $array[] = $dto;
         }
 

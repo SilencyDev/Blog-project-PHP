@@ -4,7 +4,7 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class GetANewsRepository extends Db {
+class GetANewsRepository extends Db implements RepositoryInterface {
     public function getANews($newsId) {
         $sql = "SELECT id, userId, title, content, creationDate, updateDate, category FROM news WHERE id = ?";
 

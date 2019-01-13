@@ -1,5 +1,5 @@
 <?php $this->title = "Validation"; ?>
-
+<h1>Valid a comment</h1>
 <?php foreach ($comments as $comment):
     ?>
     <article>

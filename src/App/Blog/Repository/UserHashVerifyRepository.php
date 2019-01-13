@@ -4,8 +4,8 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class GetUserHashVerifyRepository extends Db {
-    public function getUserHashVerify($login, $password) {
+class UserHashVerifyRepository extends Db implements RepositoryInterface {
+    public function userHashVerify($login, $password) {
 		$sql = "SELECT password FROM user WHERE email = (?)";
 		$passwordHash = $this->executeRequest($sql, array($login));
 		$passwordHash = $passwordHash->fetch();

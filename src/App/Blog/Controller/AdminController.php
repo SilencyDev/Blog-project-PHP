@@ -12,7 +12,6 @@ use API\App\Blog\Manager\UserManager;
 class AdminController extends IsAdminController {
 
     public function __construct() {
-
         $this->newsManager = new NewsManager();
         $this->commentManager = new CommentManager();
         $this->imageManager = new ImageManager();

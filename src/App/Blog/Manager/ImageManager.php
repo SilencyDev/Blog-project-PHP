@@ -4,27 +4,27 @@ namespace API\App\Blog\Manager;
 
 use API\Lib\Blog\Model\Db;
 use API\App\Blog\Entity\Image;
-use API\App\Blog\Repository\GetAddImageRepository;
-use API\App\Blog\Repository\GetUpdateImageRepository;
-use API\App\Blog\Repository\GetDeleteImageRepository;
+use API\App\Blog\Repository\AddImageRepository;
+use API\App\Blog\Repository\UpdateImageRepository;
+use API\App\Blog\Repository\DeleteImageRepository;
 
 class ImageManager extends Db {
     
     public function addImage(string $url, string $name) {
-        $repo = new GetAddImageRepository();
+        $repo = new AddImageRepository();
 
-        $repo->getAddImage($url, $name);
+        $repo->addImage($url, $name);
     }
 
     public function updateImage(string $url, string $name, int $imageId) {
-        $repo = new GetUpdateImageRepository();
+        $repo = new UpdateImageRepository();
 
-        $repo->getUpdateImage($url, $name, $imageId);
+        $repo->updateImage($url, $name, $imageId);
     }
 
     public function deleteImage(int $imageId) {
-        $repo = new GetDeleteImageRepository();
+        $repo = new DeleteImageRepository();
 
-        $repo->getDeleteImage($imageId);
+        $repo->deleteImage($imageId);
     }
 }

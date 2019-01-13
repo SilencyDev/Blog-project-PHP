@@ -4,7 +4,7 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class GetUserRepository extends Db {
+class GetUserRepository extends Db implements RepositoryInterface {
     public function getUser($login) {
         $sql = "SELECT id, email , password, imageId, firstName, lastName, pseudo, 
 			dateOfBirth, administrator, profileDate FROM user WHERE email=?";

@@ -1,5 +1,4 @@
 <?php $this->title = "Home"; ?>
-
 Kévin Macquet<Br/> 
 catchphrase<Br/><Br/>
 <a href = "https://drive.google.com/open?id=1emBqUk73JutgtGrhRabsTrUcHfoJ6PQK"> Lien CV </a><Br/><Br/>

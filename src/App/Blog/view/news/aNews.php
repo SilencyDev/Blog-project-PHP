@@ -1,5 +1,4 @@
 <?php foreach($aNews as $news):  endforeach; $this->title = "News - " .$news->getTitle(); ?>
-
 <article>
     <header>
         <h1><?= $news->getTitle() ?></h1>
@@ -27,8 +26,7 @@
     <h1>Answer to <?= $news->getTitle() ?></h1>
 </header>
 <?php foreach ($comments as $comment): ?>
-    <p><?= $comment->getPseudo() ?> comment :</p>
-    <p><?= $comment->getContent() ?></p>
+    <p><h3><?= $comment->getPseudo()." :" ?></h3><?= $comment->getContent() ?></p>
     <p><?= date('d/m/Y \a\t H\hi', strtotime($comment->getCreationDate())) ?></p>
     <?php if($request->getSession()->existAttribut('id') && $request->getSession()->getAttribut('id') == $comment->getUserId() 
         || $request->getSession()->existAttribut('administrator') && $request->getSession()->getAttribut('administrator')) : ?>

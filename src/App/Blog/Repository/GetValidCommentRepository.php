@@ -4,7 +4,7 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class GetValidCommentRepository extends Db {
+class GetValidCommentRepository extends Db implements RepositoryInterface {
     public function getValidComment($commentId) {
     $sql = 'UPDATE comment SET validated = 1 WHERE id = ?';
 

@@ -1,5 +1,5 @@
 <?php $this->title = "Blog"; ?>
-
+<h1>Last News</h1>
 <?php foreach ($news as $aNews):?>
     <article>
         <header>
