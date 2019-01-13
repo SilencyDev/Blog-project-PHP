@@ -1,11 +1,11 @@
-<?php $this->title = "Log In";
-
-if(!$request->getSession()->existAttribut("id")) : ?>
+<?php $this->title = "Log In";?>
+<h1>Sign in</h1>
+<?php if(!$request->getSession()->existAttribut("id")) : ?>
         
-        <form method="post" action="Connect/connect">
-            <input id="login" name="login" placeholder="Your login (e-mail)" required><br />
-            <input type ="password" id="password" name="password" placeholder="Your password" required><br />
-            <input type="submit" value="Sign up" />
+        <form method="post" action="Connect/connect" class="form-group">
+            <input class="form-control" id="login" name="login" placeholder="Your login (e-mail)" required><br />
+            <input class="form-control" type ="password" id="password" name="password" placeholder="Your password" required><br />
+            <input class="form-control blue-submit" type="submit" value="Sign up" />
         </form>
 
 <?php endif; ?>

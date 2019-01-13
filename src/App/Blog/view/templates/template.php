@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <base href="<?= $webRoot ?>" >
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <!-- <link rel="stylesheet" href="<?= $webRoot ?>web/css/style2.css" type="text/css"> -->
+        <link rel="stylesheet" href="<?= $webRoot ?>web/css/style6.css" type="text/css">
         <title><?= $title ?></title>
     </head>
     <body>
@@ -39,6 +39,11 @@
                         <li>Validation</li>
                     </a>
                 <?php endif; ?>
+                <?php if($request->getSession()->existAttribut("id")) : ?>
+                    <a href="connect/disconnect">
+                        <li>Disconnect</li>
+                    </a>
+                <?php endif; ?>
                         </ul>
                     </div>
                 </nav>
@@ -56,9 +61,6 @@
                 <br/>
             </div><br/> <!-- #content -->
             <footer id="foot">
-            <?php if($request->getSession()->existAttribut("id")) : ?>
-            <a href = connect/disconnect> Disconnect </a><br/>
-                <?php endif; ?>
             </footer>
         </div> <!-- #global -->
     </body>
