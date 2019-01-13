@@ -4,23 +4,22 @@
     ?>
     <article>
         <header>
-            <a href="<?= "news/aNews/" . $comment->getNewsId() ?>">
-                <h1><?= $comment->getPseudo() ?></h1>
-            </a>
+            <h1><a href="<?= "news/aNews/" . $comment->getNewsId() ?>"><?= $comment->getPseudo()?></a></h1>
             <time><?= date('d/m/Y \a\t H\hi', strtotime($comment->getCreationDate())) ?></time>
         </header>
             <p><?= $comment->getContent() ?></p>
-        <form method="post" action="Admin/validComment">
-            <label> Validated? </label>
-            <input type="checkbox" name="validated"/>
-            <input type="hidden" name="commentId" value="<?= $comment->getId() ?>"/>
-            <input type="submit" value="submit"/>
-        </form>
-        <form method="post" action="admin/deleteCommentToValid">
-            <input type="hidden" name="newsId" value="<?= $comment->getNewsId() ?>" />
-            <input type="hidden" name="commentId" value="<?= $comment->getId() ?>" />
-            <input type="submit" value="Delete comment" />
-        </form>
+        <div class="flex">
+            <form method="post" action="Admin/validComment" class="form-group flex">
+                <input class="form-control" type="hidden" name="validated" value="1"/>
+                <input class="form-control" type="hidden" name="commentId" value="<?= $comment->getId() ?>"/>
+                <input class="form-control blue-submit" type="submit" value="Valid comment"/>
+            </form>
+            <form method="post" action="admin/deleteCommentToValid" class="form-group flex">
+                <input type="hidden" name="newsId" value="<?= $comment->getNewsId() ?>" />
+                <input type="hidden" name="commentId" value="<?= $comment->getId() ?>" />
+                <input class="form-control red-submit" type="submit" value="Delete comment" />
+            </form>
+        </div>
     </article>
     <hr />
 <?php endforeach; ?>

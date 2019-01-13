@@ -1,5 +1,5 @@
 <?php $this->title = "Sign in" ?>
-
+<h1>Log in</h1>
 <form method="post" action="signin/addUser">
     <input name="pseudo" placeholder="Pseudo" required><br />
     <input name="password" placeholder="Password" type="password" required><br />
