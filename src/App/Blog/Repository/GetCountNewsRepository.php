@@ -4,7 +4,7 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class GetCountNewsRepository extends Db {
+class GetCountNewsRepository extends Db implements RepositoryInterface {
     public function getCountNews() {
         $sql = 'SELECT count(*) FROM news';
 

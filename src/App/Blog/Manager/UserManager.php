@@ -6,49 +6,49 @@ use API\Lib\Blog\Model\Db;
 use API\App\Blog\Entity\User;
 use API\App\Blog\Repository\GetUserRepository;
 use API\App\Blog\Factory\GetUserDTOFactory;
-use API\App\Blog\Repository\GetDeleteUserRepository;
-use API\App\Blog\Repository\GetUpdateUserRepository;
-use API\App\Blog\Repository\GetAddUserRepository;
-use API\App\Blog\Repository\GetUserHashVerifyRepository;
-use API\App\Blog\Repository\GetEmailExistRepository;
-use API\App\Blog\Repository\GetPseudoExistRepository;
+use API\App\Blog\Repository\DeleteUserRepository;
+use API\App\Blog\Repository\UpdateUserRepository;
+use API\App\Blog\Repository\AddUserRepository;
+use API\App\Blog\Repository\UserHashVerifyRepository;
+use API\App\Blog\Repository\EmailExistRepository;
+use API\App\Blog\Repository\PseudoExistRepository;
 
 class UserManager extends Db {
 
     public function addUser(string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth) {
-        $repo = new GetAddUserRepository();
+        $repo = new AddUserRepository();
 
-        $repo->getAddUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth);
+        $repo->addUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth);
     }
 
     public function updateUser(int $imageId, string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth, boolean $administrator, $profileDate, $request) {
-        $repo = new GetUpdateUserRepository();
+        $repo = new UpdateUserRepository();
 
-        $repo->getUpdateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request);
+        $repo->updateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request);
     }
 
     public function deleteUser(int $userId) {
-        $repo = new GetDeleteUserRepository();
+        $repo = new DeleteUserRepository();
 
-        $repo->getDeleteUser($userId);
+        $repo->deleteUser($userId);
     }
 
     public function emailExist(string $email) {
-        $repo = new GetEmailExistRepository();
+        $repo = new EmailExistRepository();
 
-        return $repo->getEmailExist($email);
+        return $repo->emailExist($email);
     }
 
     public function pseudoExist(string $pseudo) {
-        $repo = new GetPseudoExistRepository();
+        $repo = new PseudoExistRepository();
 
-        return $repo->getPseudoExist($pseudo);
+        return $repo->pseudoExist($pseudo);
     }
     
 	public function userHashVerify(string $login, string $password) {
-        $repo = new GetUserHashVerifyRepository();
+        $repo = new UserHashVerifyRepository();
         
-        return $repo->getUserHashVerify($login, $password);
+        return $repo->userHashVerify($login, $password);
 	}
 
     public function getUser(string $login) {

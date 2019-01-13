@@ -4,7 +4,7 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class GetUnvalidatedCommentRepository extends Db {
+class GetUnvalidatedCommentRepository extends Db implements RepositoryInterface {
     public function getUnvalidatedComment() {
         $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo, validated FROM comment LEFT JOIN user ON comment.userId = user.id WHERE validated = 0 ORDER BY id ASC';
     

@@ -18,7 +18,7 @@ class NewsController extends Controller {
     }
 
     Public function index() {
-        $news = $this->newsManager->getNews();
+        $news = $this->newsManager->getNews($this->request);
         $this->createView(array('news' => $news));
     }
 

@@ -2,7 +2,7 @@
 
 namespace API\App\Blog\DTO;
 
-class GetUnvalidatedCommentDTO implements DTOInterface  {
+class GetCommentDTO implements DTOInterface  {
 
 	private $id;
     private $userId;

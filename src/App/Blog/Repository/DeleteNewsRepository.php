@@ -4,8 +4,8 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class GetDeleteNewsRepository extends Db {
-    public function getDeleteNews($newsId) {
+class DeleteNewsRepository extends Db implements RepositoryInterface {
+    public function deleteNews($newsId) {
         $sql = 'DELETE FROM news WHERE id = ?';
         $q = $this->executeRequest($sql,array($newsId));
     }
