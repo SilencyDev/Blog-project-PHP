@@ -6,9 +6,21 @@ div#content {
   position: relative;
 }
 
+div#error {
+  margin-right: 10%;
+  margin-left: 10%;
+  position: relative;
+  color: #ee4c4c;
+}
+
 h1 {
   color: #66afe9;
 }
+
+.padding-up {
+  padding-top: 50px;
+}
+
 textarea#content {
   position: relative;
   left: auto;

@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <base href="<?= $webRoot ?>" >
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="<?= $webRoot ?>web/css/style6.css" type="text/css">
+        <link rel="stylesheet" href="<?= $webRoot ?>web/css/style1.css" type="text/css">
         <title><?= $title ?></title>
     </head>
     <body>
@@ -27,7 +27,7 @@
                     <a href="Connect/index">
                         <li>Log in</li>
                     </a>
-                    <a href="SignIn/index">
+                    <a href="SignUp/index">
                         <li>Sign up</li>
                     </a>
                 <?php endif; ?>
@@ -48,17 +48,15 @@
                     </div>
                 </nav>
             </header>
-            <br/><br/>
+            <br/><br/><br/><br/>
             <div id="error"> <!-- #error -->
                 <?php if(isset( $_SESSION['error']) && $_SESSION['error'] != "") :
-                  echo  $_SESSION['error'];
+                  echo $_SESSION['error'];
                   $_SESSION['error']="";
                    endif; ?> <!-- #error -->
             </div>
             <div id="content"> <!-- #content -->
-                <br/>
                 <?= $content ?>
-                <br/>
             </div><br/> <!-- #content -->
             <footer id="foot">
             </footer>

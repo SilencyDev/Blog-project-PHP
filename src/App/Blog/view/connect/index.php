@@ -1,5 +1,5 @@
 <?php $this->title = "Log In";?>
-<h1>Sign in</h1>
+<h1>Log in</h1>
 <?php if(!$request->getSession()->existAttribut("id")) : ?>
         
         <form method="post" action="Connect/connect" class="form-group">
