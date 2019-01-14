@@ -6,7 +6,7 @@ use API\Lib\Blog\Controller\Controller;
 use API\Lib\Blog\Config\Configuration;
 use API\App\Blog\Manager\UserManager;
 
-class SignInController extends Controller {
+class SignUpController extends Controller {
 
     private $user;
 
