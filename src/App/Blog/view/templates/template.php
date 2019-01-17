@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <base href="<?= $webRoot ?>" >
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="<?= $webRoot ?>web/css/style1.css" type="text/css">
+        <link rel="stylesheet" href="<?= $webRoot ?>web/css/style21.css" type="text/css">
         <title><?= $title ?></title>
     </head>
     <body>
