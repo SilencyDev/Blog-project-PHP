@@ -4,11 +4,22 @@ namespace API\App\Blog\Controller;
 
 use API\Lib\Blog\Controller\Controller;
 use API\Lib\Blog\Config\Configuration;
+use API\App\Blog\Manager\ImageManager;
 
 class HomeController extends Controller {
 
+    public function __construct() {
+        $this->imageManager = new ImageManager();
+    }
+
     Public function index() {
-        $this->createView();
+        $a = $this->imageManager->getImage('LinkedInIcon');
+        $b = $this->imageManager->getImage('GitHubIcon');
+        $icons = array_merge($a,$b);
+
+        $cv = $this->imageManager->getImage('CVIcon');
+
+        $this->createView(array('icons'=> $icons, 'cv' => $cv));
     }
 
     public function sendMail() {

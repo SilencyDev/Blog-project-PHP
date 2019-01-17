@@ -2,7 +2,7 @@
 
 namespace API\App\Blog\DTO;
 
-class GetNewsDTO implements DTOInterface  {
+class GetNewsDTO implements DTOInterface {
     
     private $id;
 	private $userId;
