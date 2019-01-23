@@ -13,13 +13,7 @@ class HomeController extends Controller {
     }
 
     Public function index() {
-        $a = $this->imageManager->getImage('LinkedInIcon');
-        $b = $this->imageManager->getImage('GitHubIcon');
-        $icons = array_merge($a,$b);
-
-        $cv = $this->imageManager->getImage('CVIcon');
-
-        $this->createView(array('icons'=> $icons, 'cv' => $cv));
+        $this->createView();
     }
 
     public function sendMail() {

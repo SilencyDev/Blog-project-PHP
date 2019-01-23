@@ -4,56 +4,50 @@ namespace API\App\Blog\Manager;
 
 use API\Lib\Blog\Model\Db;
 use API\App\Blog\Entity\User;
-use API\App\Blog\Repository\GetUserRepository;
 use API\App\Blog\Factory\GetUserDTOFactory;
-use API\App\Blog\Repository\DeleteUserRepository;
-use API\App\Blog\Repository\UpdateUserRepository;
-use API\App\Blog\Repository\AddUserRepository;
-use API\App\Blog\Repository\UserHashVerifyRepository;
-use API\App\Blog\Repository\EmailExistRepository;
-use API\App\Blog\Repository\PseudoExistRepository;
+use API\App\Blog\Repository\UserRepository;
 
 class UserManager extends Db {
 
+    public function getUser(string $login) {
+        $repo = new UserRepository();
+        
+        return $repo->getUser($login);
+    }
+    
     public function addUser(string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth) {
-        $repo = new AddUserRepository();
+        $repo = new UserRepository();
 
         $repo->addUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth);
     }
 
     public function updateUser(int $imageId, string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth, boolean $administrator, $profileDate, $request) {
-        $repo = new UpdateUserRepository();
+        $repo = new UserRepository();
 
         $repo->updateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request);
     }
 
     public function deleteUser(int $userId) {
-        $repo = new DeleteUserRepository();
+        $repo = new UserRepository();
 
         $repo->deleteUser($userId);
     }
 
     public function emailExist(string $email) {
-        $repo = new EmailExistRepository();
+        $repo = new UserRepository();
 
         return $repo->emailExist($email);
     }
 
     public function pseudoExist(string $pseudo) {
-        $repo = new PseudoExistRepository();
+        $repo = new UserRepository();
 
         return $repo->pseudoExist($pseudo);
     }
     
 	public function userHashVerify(string $login, string $password) {
-        $repo = new UserHashVerifyRepository();
+        $repo = new UserRepository();
         
         return $repo->userHashVerify($login, $password);
 	}
-
-    public function getUser(string $login) {
-        $repo = new GetUserRepository();
-        
-        return $repo->getUser($login);
-    }
 }
