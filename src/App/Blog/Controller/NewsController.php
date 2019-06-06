@@ -8,10 +8,7 @@ use API\App\Blog\Manager\CommentManager;
 use API\App\Blog\Manager\NewsManager;
 
 class NewsController extends Controller {
-
-    protected $newsManager;
-    protected $commentManager;
-
+    
     public function __construct() {
         $this->newsManager = new NewsManager();
         $this->commentManager = new CommentManager();
