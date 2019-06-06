@@ -27,12 +27,12 @@ class AdminController extends IsAdminController {
     }
 
     public function addNews() {
-            $content = $this->request->getParams("content");
-            $title = $this->request->getParams("title");
-            $userId = $this->request->getSession()->getAttribut("id");
+        $content = $this->request->getParams("content");
+        $title = $this->request->getParams("title");
+        $userId = $this->request->getSession()->getAttribut("id");
 
-            $this->newsManager->addNews($content, $title, $userId);
-            $this->redirect('News');
+        $this->newsManager->addNews($content, $title, $userId);
+        $this->redirect('News');
     }
 
     public function updateNewsPage() {
@@ -40,12 +40,12 @@ class AdminController extends IsAdminController {
     }
 
     public function updateNews() {
-            $content = $this->request->getParams("content");
-            $title = $this->request->getParams("title");
-            $newsId = $this->request->getParams("newsId");
+        $content = $this->request->getParams("content");
+        $title = $this->request->getParams("title");
+        $newsId = $this->request->getParams("newsId");
 
-            $this->newsManager->UpdateNews($content, $title, $newsId);
-            $this->redirect('News/aNews/'.$newsId);
+        $this->newsManager->UpdateNews($content, $title, $newsId);
+        $this->redirect('News/aNews/'.$newsId);
     }
 
     public function deleteNews() {
@@ -58,16 +58,16 @@ class AdminController extends IsAdminController {
 
     Public function validCommentPage() {
         $comments = $this->commentManager->getUnvalidatedComment();
+
         $this->createView(array('comments' => $comments));
     }
 
     Public function validComment() {
         if($this->request->existParams("validated") && $this->request->getParams("validated")) {
             $commentId = $this->request->getParams("commentId");
-            var_dump($commentId);
+
             $this->commentManager->ValidComment($commentId);
         }
-
         $this->redirect('Admin/validCommentPage');
     }
 

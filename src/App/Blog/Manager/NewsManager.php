@@ -15,12 +15,11 @@ class NewsManager extends Db {
     $repo = new NewsRepository();
     $factory = new GetNewsDTOFactory();
 
-    $q = $request->existParams('page');
+    $q = $request->existParams('page') ? $request->getParams('page') : NULL;
     $page = isset($q) ? (int) $q : 1;
-    $newsPerPage = Configuration::get("newsPerPage");
     $start = ($page > 1) ? ($page * $newsPerPage) - $newsPerPage : 0;
 
-    $news = $factory->createFromRepository($repo->getNews($page, $newsPerPage, $start));
+    $news = $factory->createFromRepository($repo->getNews($page, Configuration::get("newsPerPage"), $start));
     
     return $news;
   }
