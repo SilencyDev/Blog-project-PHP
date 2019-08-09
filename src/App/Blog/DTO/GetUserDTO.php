@@ -5,7 +5,6 @@ namespace API\App\Blog\DTO;
 class GetUserDTO implements DTOInterface {
 
     private $id;
-	private $imageId;
 	private $firstName;
 	private $lastName;
 	private $pseudo;
@@ -21,16 +20,6 @@ class GetUserDTO implements DTOInterface {
 
 	public function setId(int $id) :self {
 		$this->id = $id;
-
-		return $this;
-	}
-
-	public function getImageId() :int {
-		return $this->imageId;
-	}
-
-	public function setImageId(int $imageId) :self {
-		$this->imageId = $imageId;
 
 		return $this;
 	}

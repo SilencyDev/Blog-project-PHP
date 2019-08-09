@@ -7,7 +7,6 @@ use API\App\Blog\Manager\UserManager;
 class User extends UserManager {
 
 	private $id;
-	private $imageId;
 	private $firstName;
 	private $lastName;
 	private $pseudo;
@@ -23,16 +22,6 @@ class User extends UserManager {
 
 	public function setId(int $id) :self {
 		$this->id = $id;
-
-		return $this;
-	}
-
-	public function getImageId() :int {
-		return $this->imageId;
-	}
-
-	public function setImageId(int $imageId) :self {
-		$this->imageId = $imageId;
 
 		return $this;
 	}

@@ -13,7 +13,6 @@ class News extends Entity {
 	private $title;
 	private $creationDate;
 	private $updateDate;
-	private $category;
 
 	public function getId() :int {	
 		return $this->id;
@@ -71,16 +70,6 @@ class News extends Entity {
 	
 	public function setUpdateDate($updateDate = NULL) :self {
 		$this->update = $updateDate;
-
-		return $this;
-	}
-
-	public function getCategory() :string {
-		return $this->category;
-	}
-
-	public function setCategory(string $category = NULL) :self {
-		$this->category = $category;
 
 		return $this;
 	}

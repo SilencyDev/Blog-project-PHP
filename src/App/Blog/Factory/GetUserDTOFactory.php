@@ -12,7 +12,6 @@ class GetUserDTOFactory implements DTOFactoryInterface {
             $dto = new GetUserDTO();
 
             $dto->setId($aData["id"]);
-            $dto->setImageId($aData["imageId"]);
             $dto->setFirstName($aData["firstName"]);
             $dto->setLastName($aData["lastName"]);
 	        $dto->setPseudo($aData["pseudo"]);

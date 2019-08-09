@@ -7,7 +7,7 @@ use API\Lib\Blog\Model\Db;
 class UserRepository extends Db implements RepositoryInterface {
     
     public function getUser($login) {
-        $sql = "SELECT id, email , password, imageId, firstName, lastName, pseudo, 
+        $sql = "SELECT id, email , password, firstName, lastName, pseudo, 
 			dateOfBirth, administrator, profileDate FROM user WHERE email=?";
         $user = $this->executeRequest($sql, array($login));
         if ($user->rowcount() == 1) {
@@ -23,10 +23,10 @@ class UserRepository extends Db implements RepositoryInterface {
         $q = $this->executeRequest($sql,array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s")));
     }
 
-    public function updateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request) {
-        $q = 'UPDATE user SET imageId = ?, firstName = ?, lastName = ?, pseudo = ?, password = ?, email = ?, dateOfBirth = ?, administrator = ? WHERE id =?';
+    public function updateUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request) {
+        $q = 'UPDATE user SET firstName = ?, lastName = ?, pseudo = ?, password = ?, email = ?, dateOfBirth = ?, administrator = ? WHERE id =?';
 
-        $q = $this->executeRequest($sql,array($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s"), $request->getSession()->getAttribut('id')));
+        $q = $this->executeRequest($sql,array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s"), $request->getSession()->getAttribut('id')));
     }
 
     public function deleteUser($newsId) {

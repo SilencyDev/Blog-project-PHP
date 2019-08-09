@@ -14,17 +14,18 @@ class NewsManager extends Db {
   public function getNews($request) {
     $repo = new NewsRepository();
     $factory = new GetNewsDTOFactory();
+    $newsPerPage = Configuration::get("newsPerPage");
 
     $q = $request->existParams('page') ? $request->getParams('page') : NULL;
     $page = isset($q) ? (int) $q : 1;
     $start = ($page > 1) ? ($page * $newsPerPage) - $newsPerPage : 0;
 
-    $news = $factory->createFromRepository($repo->getNews($page, Configuration::get("newsPerPage"), $start));
-    
+    $news = $factory->createFromRepository($repo->getNews($page, $newsPerPage, $start));
+
     return $news;
   }
 
-  public function getUniqueNews(int $newsId) {
+  public function getANews(int $newsId) {
     $repo = new NewsRepository();
     $factory = new GetNewsDTOFactory();
     
@@ -52,9 +53,9 @@ class NewsManager extends Db {
   }
 
   public function countNews() {
-    $repo = new GetCountNewsRepository();
+    $repo = new NewsRepository();
 
-    $count = $repo->getCountNews();
+    $countNews = $repo->countNews();
 
     return $countNews;
   }
