@@ -16,13 +16,16 @@ class NewsController extends Controller {
 
     Public function index() {
         $news = $this->newsManager->getNews($this->request);
-        $this->createView(array('news' => $news));
+        $countNews = $this->newsManager->countNews();
+        $newsPerPage = Configuration::get("newsPerPage");
+        
+        $this->createView(array('news' => $news,'countNews' => $countNews, 'newsPerPage' => $newsPerPage));
     }
 
     Public function aNews() {
         $newsId = $this->request->getParams("id");
 
-        $aNews = $this->newsManager->getUniqueNews($newsId);
+        $aNews = $this->newsManager->getANews($newsId);
         $comments = $this->commentManager->getValidatedComment($newsId);
 
         $this->createView(array('aNews' => $aNews, 'comments' => $comments));

@@ -10,3 +10,9 @@
     </article>
     <hr />
 <?php endforeach; ?>
+
+<?php $nbPage = ceil($countNews/$newsPerPage)?>
+
+<?php for($i=1;$i<=$nbPage;$i++)
+        echo '<a href="news/index/0/'.$i. '">'.$i.' </a>'
+    ?>

@@ -21,10 +21,10 @@ class UserManager extends Db {
         $repo->addUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth);
     }
 
-    public function updateUser(int $imageId, string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth, boolean $administrator, $profileDate, $request) {
+    public function updateUser(string $firstName, string $lastName, string $pseudo, string $password, string $email, $dateOfBirth, boolean $administrator, $profileDate, $request) {
         $repo = new UserRepository();
 
-        $repo->updateUser($imageId, $firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request);
+        $repo->updateUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request);
     }
 
     public function deleteUser(int $userId) {

@@ -6,7 +6,6 @@ use API\App\Blog\Controller\IsAdminController;
 use API\Lib\Blog\Config\Configuration;
 use API\App\Blog\Manager\NewsManager;
 use API\App\Blog\Manager\CommentManager;
-use API\App\Blog\Manager\ImageManager;
 use API\App\Blog\Manager\UserManager;
 
 class AdminController extends IsAdminController {
@@ -14,7 +13,6 @@ class AdminController extends IsAdminController {
     public function __construct() {
         $this->newsManager = new NewsManager();
         $this->commentManager = new CommentManager();
-        $this->imageManager = new ImageManager();
         $this->userManager = new UserManager();
     }
 
@@ -31,7 +29,7 @@ class AdminController extends IsAdminController {
         $title = $this->request->getParams("title");
         $userId = $this->request->getSession()->getAttribut("id");
 
-        $this->newsManager->addNews($content, $title, $userId);
+        $this->newsManager->addNews($title, $content, $userId);
         $this->redirect('News');
     }
 

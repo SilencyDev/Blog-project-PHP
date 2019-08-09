@@ -24,7 +24,7 @@
                     <li>News</li>
                 </a>
                 <?php if(!$request->getSession()->existAttribut("id")) : ?>
-                    <a href="Connect/index">
+                <a href="Connect/index">
                         <li>Log in</li>
                     </a>
                     <a href="SignUp/index">
