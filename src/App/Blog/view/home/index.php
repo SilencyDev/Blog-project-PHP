@@ -2,7 +2,7 @@
 <h1>Kévin Macquet</h1>
 <h3>Coding . Fitness . Food . Learning . Live .</h3></br>
     <div class="cv">
-        <a href="https://drive.google.com/file/d/1uNg6WBrgOqoohLT-J6qOPue5jdHVHZij/view?usp=sharing"><img src="https://i.imgur.com/yfTPMoW.png" alt="CV" height="auto" width="100%"></a>
+        <a href="https://drive.google.com/file/d/1kBNnntq9yduQbHptgCAaHAj7jxQO2zqh/view?usp=sharing"><img src="https://i.imgur.com/yfTPMoW.png" alt="CV" height="auto" width="100%"></a>
     </div>
 <h2>Social links</h2>
     <a href='https://github.com/SilencyDev'><img src="https://i.imgur.com/DvLbTD4.png" alt="GitHub" height="50" width="50"></a>
