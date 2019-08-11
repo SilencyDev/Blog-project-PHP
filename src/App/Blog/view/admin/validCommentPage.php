@@ -1,5 +1,6 @@
 <?php $this->title = "Validation"; ?>
 <h1>Valid a comment</h1>
+<div class="flexboxCL">
 <?php foreach ($comments as $comment):
     ?>
     <article>
@@ -8,7 +9,7 @@
             <time><?= date('d/m/Y \a\t H\hi', strtotime($comment->getCreationDate())) ?></time>
         </header>
             <p><?= $comment->getContent() ?></p>
-        <div class="flex">
+            <div class="flexboxCL">
             <form method="post" action="Admin/validComment" class="form-group flex">
                 <input class="form-control" type="hidden" name="validated" value="1"/>
                 <input class="form-control" type="hidden" name="commentId" value="<?= $comment->getId() ?>"/>
@@ -19,7 +20,8 @@
                 <input type="hidden" name="commentId" value="<?= $comment->getId() ?>" />
                 <input class="form-control red-submit" type="submit" value="Delete comment" />
             </form>
-        </div>
+            </div> 
     </article>
     <hr />
 <?php endforeach; ?>
+</div>

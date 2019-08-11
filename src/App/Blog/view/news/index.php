@@ -1,18 +1,23 @@
 <?php $this->title = "Blog"; ?>
-<h1>Last News</h1>
-<?php foreach ($news as $aNews):?>
-    <article>
-        <header>
-            <h1><a href="<?= "news/aNews/" . $aNews->getId() ?>"><?= $aNews->getTitle()?></a></h1>
-            <time><?= date('d/m/Y \a\t H\hi', strtotime($aNews->getCreationDate())) ?></time>
-        </header>
-        <p><?= substr($aNews->getContent(),0,200) ?>...</p>
-    </article>
-    <hr />
-<?php endforeach; ?>
-
-<?php $nbPage = ceil($countNews/$newsPerPage)?>
-
-<?php for($i=1;$i<=$nbPage;$i++)
-        echo '<a href="news/index/0/'.$i. '">'.$i.' </a>'
+<div class="flexbox">
+    <h1>Last News</h1>
+</div><br/>
+<div>
+    <?php foreach ($news as $aNews):?>
+        <article>
+            <header>
+                <h1><a href="<?= "news/aNews/" . $aNews->getId() ?>"><?= $aNews->getTitle()?></a></h1>
+                <time><?= date('d/m/Y \a\t H\hi', strtotime($aNews->getCreationDate())) ?></time>
+            </header>
+            <p><?= substr($aNews->getContent(),0,200) ?>...</p>
+        </article>
+        <br/>
+    <?php endforeach; ?>
+    </div>
+    <br/>
+    <?php $nbPage = ceil($countNews/$newsPerPage)?>
+<div class="flexbox">
+    <?php for($i=1;$i<=$nbPage;$i++)
+        echo '<h3><a class="pagination" href="news/index/0/'.$i. '">'.$i.' </a></h3>'
     ?>
+</div>
