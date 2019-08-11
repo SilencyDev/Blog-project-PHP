@@ -40,7 +40,7 @@
             <hr>
     <?php endif; ?>
 <?php endforeach; ?>
-<hr></br>
+<hr><br/>
 <?php if($request->getSession()->existAttribut("id")) : ?>
     <form class="form-group" method="post" action="news/addComment">
         <input class="form-control" type="hidden" name="newsId" value="<?= $news->getId() ?>" />
