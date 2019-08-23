@@ -18,8 +18,9 @@ class NewsController extends Controller {
         $news = $this->newsManager->getNews($this->request);
         $countNews = $this->newsManager->countNews();
         $newsPerPage = Configuration::get("newsPerPage");
+        $nbPage = ceil($countNews/$newsPerPage);
         
-        $this->createView(array('news' => $news,'countNews' => $countNews, 'newsPerPage' => $newsPerPage));
+        $this->createView(array('news' => $news,'countNews' => $countNews, 'newsPerPage' => $newsPerPage, 'nbPage' =>$nbPage));
     }
 
     Public function aNews() {
