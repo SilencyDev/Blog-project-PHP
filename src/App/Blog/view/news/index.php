@@ -15,9 +15,8 @@
     <?php endforeach; ?>
     </div>
     <br/>
-    <?php $nbPage = ceil($countNews/$newsPerPage)?>
 <div class="flexbox">
     <?php for($i=1;$i<=$nbPage;$i++)
-        echo '<h3><a class="pagination" href="news/index/0/'.$i. '">'.$i.' </a></h3>'
+        echo '<strong><a class="pagination" href="news/index/0/'.$i. '">'.$i.' </a></strong>'
     ?>
 </div>
