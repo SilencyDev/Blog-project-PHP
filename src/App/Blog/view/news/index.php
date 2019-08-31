@@ -7,7 +7,7 @@
         <article>
             <header>
                 <h1><a href="<?= "news/aNews/" . $aNews->getId() ?>"><?= $aNews->getTitle()?></a></h1>
-                <time><?= date('d/m/Y \a\t H\hi', strtotime($aNews->getCreationDate())) ?></time>
+                <time><?= $aNews->getCreationDate()->format('d/m/Y \a\t H\hi') ?></time>
             </header>
             <p><?= substr($aNews->getContent(),0,200) ?>...</p>
         </article>

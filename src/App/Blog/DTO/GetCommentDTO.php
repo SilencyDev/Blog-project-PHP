@@ -41,12 +41,12 @@ class GetCommentDTO implements DTOInterface  {
 		return $this;
 	}
 
-	public function getCreationDate() {	
+	public function getCreationDate() :\DateTime {	
 		return $this->creationDate;
 	}
 	
-	public function setCreationDate($creationDate) :self {	
-		$this->creationDate = $creationDate;
+	public function setCreationDate(string $creationDate) :self {	
+		$this->creationDate = new \DateTime($creationDate);
 
 		return $this;
 	}
