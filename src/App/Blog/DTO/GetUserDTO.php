@@ -74,17 +74,18 @@ class GetUserDTO implements DTOInterface {
 		return $this;
 	}
 
-	public function getDateOfBirth() {
+	public function getDateOfBirth() :\DateTime {
+		
 		return $this->dateOfBirth;
 	}
 
-	public function setDateOfBirth($dateOfBirth) :self {
-		$this->dateOfBirth = $dateOfBirth;
+	public function setDateOfBirth(string $dateOfBirth) :self {
+		$this->dateOfBirth = new \DateTime($dateOfBirth);
 
 		return $this;
 	}
 
-	public function getAdministrator() :bool{
+	public function getAdministrator() :bool {
 		return $this->administrator;
 	}
 
@@ -94,12 +95,12 @@ class GetUserDTO implements DTOInterface {
 		return $this;
 	}
 
-	public function getProfileDate() {
+	public function getProfileDate() :\DateTime {
 		return $this->profileDate;
 	}
 
-	public function setProfileDate($profileDate) :self {
-		$this->profileDate = $profileDate;
+	public function setProfileDate(string $profileDate) :self {
+		$this->profileDate = new \DateTime($profileDate);
 
 		return $this;
 	}

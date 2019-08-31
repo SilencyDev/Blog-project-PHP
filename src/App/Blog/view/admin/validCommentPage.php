@@ -6,7 +6,7 @@
     <article>
         <header>
             <h1><a href="<?= "news/aNews/" . $comment->getNewsId() ?>"><?= $comment->getPseudo()?></a></h1>
-            <time><?= date('d/m/Y \a\t H\hi', strtotime($comment->getCreationDate())) ?></time>
+            <time><?= $comment->getCreationDate()->format('d/m/Y \a\t H\hi') ?></time>
         </header>
             <p><?= $comment->getContent() ?></p>
             <div class="flexboxCL">

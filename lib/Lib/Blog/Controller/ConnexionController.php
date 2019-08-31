@@ -19,21 +19,19 @@ class ConnexionController extends Controller {
             $login = $this->request->getParams("login");
             $password = $this->request->getParams("password");
 
-            if($this->userManager->userHashVerify($login, $password)) {
-                $user = $this->userManager->getUser($login);
-                
-                foreach($user as $key => $value) {
-                $this->request->getSession()->setAttribut($key,$value);
-                }
-                $this->redirect("Home");
-            }
-            else {
+            if(!$this->userManager->userHashVerify($login, $password)) {
                 $this->redirect("connect");
                 $_SESSION['error'] = "Your login or password is incorrect";
+                return;
             }
+            $user = $this->userManager->getUser($login);  
+            foreach($user as $key => $value) {
+                $this->request->getSession()->setAttribut($key,$value);
+            }
+            $this->redirect("Home");
+            return;
         }
-        else
-            throw new \Exception("Impossible Action : login or password not defined");
+        throw new \Exception("Impossible Action : login or password not defined");
     }
 
     public function disconnect() {

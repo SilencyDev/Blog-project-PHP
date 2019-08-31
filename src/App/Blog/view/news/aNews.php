@@ -2,9 +2,10 @@
     <article>
         <header>
             <h1><?= $news->getTitle() ?></h1>
-            <h3><time> Created <?= date('d/m/Y \a\t H\hi', strtotime($news->getCreationDate())) ?></time></h3>
-            <?php if(!$news->getUpdateDate() === false) : ?>
-                <Br/><time> Updated <?= date('d/m/Y \a\t H\hi', strtotime($news->getUpdateDate())) ?></time>
+            <strong><time> Created <?= $news->getCreationDate()->format('d/m/Y \a\t H\hi') ?></time></strong>
+            <?= var_dump($news->getUpdateDate()); ?>
+            <?php if(!$news->getUpdateDate() === NULL) : ?>
+            <strong><Br/><time> Updated <?= $news->getUpdateDate()->format('d/m/Y \a\t H\hi') ?></time></strong>
             <?php endif; ?>
         </header>
         <p><?= $news->getContent() ?></p>
@@ -33,7 +34,7 @@
     <?php foreach ($comments as $comment): ?>
         <p class="user"><?= $comment->getPseudo()." :" ?></p>
         <p><?= $comment->getContent() ?></p>
-        <time><?= date('d/m/Y \a\t H\hi', strtotime($comment->getCreationDate())) ?></time>
+        <time><?= $comment->getCreationDate()->format('d/m/Y \a\t H\hi') ?></time>
         <?php if($request->getSession()->existAttribut('id') && $request->getSession()->getAttribut('id') == $comment->getUserId() 
             || $request->getSession()->existAttribut('administrator') && $request->getSession()->getAttribut('administrator')) : ?>
             <form class="form-group" method="post" action="admin/deleteComment">
