@@ -11,7 +11,7 @@ class User extends Db
     public function connect($login, $password)
     {
         $sql = "SELECT id FROM user WHERE email=? and password=?";
-        $user= $this->executeRequest($sql, array($login, $pswd));
+        $user= $this->executeRequest($sql, array($login, $password));
         return ($user->rowCount() == 1);
     }
 
@@ -19,7 +19,7 @@ class User extends Db
     public function getUser($login, $password)
     {
         $sql = "SELECT id, email AS login, password FROM user WHERE email=? AND password=?";
-        $user = $this->executeRequest($sql, array($login, $pswd));
+        $user = $this->executeRequest($sql, array($login, $password));
         if ($user->rowcount() == 1) {
             return $user->fetch();
         }

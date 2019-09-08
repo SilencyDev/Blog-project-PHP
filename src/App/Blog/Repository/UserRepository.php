@@ -31,7 +31,7 @@ class UserRepository extends Db implements RepositoryInterface
         $q = $this->executeRequest($sql, array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s"), $request->getSession()->getAttribut('id')));
     }
 
-    public function deleteUser($newsId)
+    public function deleteUser($userId)
     {
         $sql = ('DELETE FROM user WHERE id = '.$userId);
 

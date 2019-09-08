@@ -90,7 +90,6 @@ class AdminController extends IsAdminController
     public function deleteCommentToValid()
     {
         $commentId = $this->request->getParams("commentId");
-        $newsId = $this->request->getParams("newsId");
 
         $this->commentManager->deleteComment($commentId);
         $this->redirect('Admin/validCommentPage/');

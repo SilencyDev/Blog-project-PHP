@@ -4,8 +4,8 @@
         <meta charset="UTF-8" />
         <base href="<?= $webRoot ?>" >
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="<?= $webRoot ?>web/css/style21.css" type="text/css">
-        <title><?= $title ?></title>
+        <link rel="stylesheet" href="<?= htmlspecialchars($webRoot) ?>web/css/style21.css" type="text/css">
+        <title><?= htmlspecialchars($title) ?></title>
     </head>
     <body>
         <div id="global"> <!-- #global -->
