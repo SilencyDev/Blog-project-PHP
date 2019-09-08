@@ -82,8 +82,9 @@ class GetNewsDTO implements DTOInterface
     
     public function setUpdateDate(string $updateDate = null) :self
     {
-        $this->updateDate = new \DateTime($updateDate);
-
+        if ($updateDate !== null) {
+            $this->updateDate = new \DateTime($updateDate);
+        }
         return $this;
     }
 
