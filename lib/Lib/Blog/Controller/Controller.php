@@ -28,10 +28,10 @@ abstract class Controller
         if (method_exists($this, $action)) {
             $this->action = $action;
             $this->{$this->action}();
-        } else {
-            $controllerClass = get_class($this);
-            throw new \Exception("'$action' isn\'t defined into '$controllerClass' class");
+            return;
         }
+        $controllerClass = get_class($this);
+        throw new \Exception("'$action' isn\'t defined into '$controllerClass' class");
     }
 
     // default Action

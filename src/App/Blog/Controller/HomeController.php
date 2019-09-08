@@ -46,7 +46,7 @@ class HomeController extends Controller
         ->setBody($content);
 
         // Send the message
-        $result = $mailer->send($message);
+        $mailer->send($message);
 
         $this->redirect('home');
     }
