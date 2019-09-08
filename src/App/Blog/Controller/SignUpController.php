@@ -8,8 +8,6 @@ use API\App\Blog\Manager\UserManager;
 
 class SignUpController extends Controller
 {
-    private $user;
-
     public function __construct()
     {
         $this->userManager = new UserManager;

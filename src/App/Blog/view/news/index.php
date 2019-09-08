@@ -18,6 +18,6 @@
 <div class="flexbox">
     <?php for ($i=1;$i<=$nbPage;$i++) {
     echo '<strong><a class="pagination" href="news/index/0/'.htmlspecialchars($i). '">'.htmlspecialchars($i).' </a></strong>';
-}
+    }
     ?>
 </div>
