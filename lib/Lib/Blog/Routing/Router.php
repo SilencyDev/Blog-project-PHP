@@ -5,9 +5,10 @@ namespace API\Lib\Blog\Routing;
 use API\Lib\Blog\Request\Request;
 use API\Lib\Blog\View\View;
 
-class Router {
-
-    public function routerRequest() {
+class Router
+{
+    public function routerRequest()
+    {
         try {
             // Regroup POST and GET into the request
             $this->clear($_POST);
@@ -18,14 +19,14 @@ class Router {
             $action = $this->newAction($request);
 
             $controller->executeAction($action);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->manageError($e);
         }
     }
     
     // Create a controller from the request
-    private function newController(Request $request) {
+    private function newController(Request $request)
+    {
         $controller = "home"; // default controller
         if ($request->existParams('controller')) {
             $controller = $request->getParams('controller');
@@ -40,12 +41,12 @@ class Router {
             $controller->setRequest($request);
             return $controller;
         }
-        else
-            throw new \Exception("'$controllerClass' file not found");
+        throw new \Exception("'$controllerClass' file not found");
     }
 
     // Looking for an action to execute from the request
-    private function newAction(Request $request) {
+    private function newAction(Request $request)
+    {
         $action = "index"; // default action
         if ($request->existParams('action')) {
             $action = $request->getParams('action');
@@ -54,13 +55,15 @@ class Router {
     }
 
     // Display an error
-    private function manageError(\Exception $exception) {
+    private function manageError(\Exception $exception)
+    {
         $view = new View('/error/index');
         $view->create(array('errorMsg' => $exception->getMessage()));
     }
 
-    public function clear(&$array) {
-        array_walk($array, function($value, $key) {
+    public function clear(&$array)
+    {
+        array_walk($array, function ($value, $key) {
             return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
         });
     }

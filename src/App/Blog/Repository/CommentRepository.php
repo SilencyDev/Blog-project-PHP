@@ -4,42 +4,49 @@ namespace API\App\Blog\Repository;
 
 use API\Lib\Blog\Model\Db;
 
-class CommentRepository extends Db implements RepositoryInterface {
-    
-    public function getUnvalidatedComment() {
+class CommentRepository extends Db implements RepositoryInterface
+{
+    public function getUnvalidatedComment()
+    {
         $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo, validated FROM comment LEFT JOIN user ON comment.userId = user.id WHERE validated = 0 ORDER BY id ASC';
         
         return $this->executeRequest($sql)->fetchAll(\PDO::FETCH_ASSOC);
     }
     
-    public function addComment($newsId, $userId, $content) {
+    public function addComment($newsId, $userId, $content)
+    {
         $sql = 'INSERT INTO comment(newsId, userId, content, creationDate) VALUES(?, ?, ?, ?)';
-        $q = $this->executeRequest($sql,array($newsId, $userId, $content, date("Y/m/d H:i:s")));
+        $q = $this->executeRequest($sql, array($newsId, $userId, $content, date("Y/m/d H:i:s")));
     }
 
-    public function deleteCommentFromNews($newsId) {
+    public function deleteCommentFromNews($newsId)
+    {
         $sql = 'DELETE FROM comment WHERE newsId = ?';
-        $q = $this->executeRequest($sql,array($newsId));
+        $q = $this->executeRequest($sql, array($newsId));
     }
 
-    public function deleteComment($commentId) {
+    public function deleteComment($commentId)
+    {
         $sql = 'DELETE FROM comment WHERE id = ?';
-        $q = $this->executeRequest($sql,array($commentId));
+        $q = $this->executeRequest($sql, array($commentId));
     }
 
-    public function getValidatedComment($newsId) {
+    public function getValidatedComment($newsId)
+    {
         $sql = 'SELECT comment.id, newsId, userId, content, creationDate, pseudo FROM comment LEFT JOIN user ON comment.userId = user.id WHERE newsId = ? and validated = 1 ORDER BY id DESC';
         
         return $this->executeRequest($sql, array($newsId))->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function validComment($commentId) {
+    public function validComment($commentId)
+    {
         $sql = 'UPDATE comment SET validated = 1 WHERE id = ?';
     
-        $q = $this->executeRequest($sql,array($commentId));
+        $q = $this->executeRequest($sql, array($commentId));
     }
 
-    public function countAllComment() {
+    public function countAllComment()
+    {
         $sql = 'SELECT count(*) FROM comment';
 
         $countComment = $this->executeRequest($sql)->fetchColumn();

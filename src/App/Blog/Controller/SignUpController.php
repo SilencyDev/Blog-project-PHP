@@ -6,20 +6,22 @@ use API\Lib\Blog\Controller\Controller;
 use API\Lib\Blog\Config\Configuration;
 use API\App\Blog\Manager\UserManager;
 
-class SignUpController extends Controller {
-
+class SignUpController extends Controller
+{
     private $user;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userManager = new UserManager;
     }
 
-    public function index() {
+    public function index()
+    {
         $this->createView();
     }
 
-    public function addUser() {
-
+    public function addUser()
+    {
         $pseudo = $this->request->getParams("pseudo");
         $password = $this->request->getParams("password");
         $password2 = $this->request->getParams("password2");
@@ -28,22 +30,17 @@ class SignUpController extends Controller {
         $lastName = $this->request->getParams("lastName");
         $dateOfBirth = $this->request->getParams("dateOfBirth");
 
-        if(!$this->userManager->emailExist($email)) {
-            if(!$this->userManager->pseudoExist($pseudo)) {
-                if($password == $password2) {
+        if (!$this->userManager->emailExist($email)) {
+            if (!$this->userManager->pseudoExist($pseudo)) {
+                if ($password == $password2) {
                     $this->userManager->addUser($firstName, $lastName, $pseudo, password_hash($password, PASSWORD_DEFAULT), $email, $dateOfBirth);
                     $this->redirect("Connect");
+                    return;
                 }
-                else {
-                    throw new \Exception("Your passwords aren't the same");
-                }
+                throw new \Exception("Your passwords aren't the same");
             }
-            else {
-                throw new \Exception("This pseudo already exist!");
-            }
+            throw new \Exception("This pseudo already exist!");
         }
-        else {
-            throw new \Exception("This email already exist!");
-        }
+        throw new \Exception("This email already exist!");
     }
 }

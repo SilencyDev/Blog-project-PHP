@@ -2,6 +2,6 @@
 
 namespace API\App\Blog\DTO;
 
-interface DTOInterface  {
-
+interface DTOInterface
+{
 }

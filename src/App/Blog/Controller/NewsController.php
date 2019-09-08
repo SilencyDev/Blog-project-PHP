@@ -7,14 +7,16 @@ use API\Lib\Blog\Config\Configuration;
 use API\App\Blog\Manager\CommentManager;
 use API\App\Blog\Manager\NewsManager;
 
-class NewsController extends Controller {
-    
-    public function __construct() {
+class NewsController extends Controller
+{
+    public function __construct()
+    {
         $this->newsManager = new NewsManager();
         $this->commentManager = new CommentManager();
     }
 
-    Public function index() {
+    public function index()
+    {
         $news = $this->newsManager->getNews($this->request);
         $countNews = $this->newsManager->countNews();
         $newsPerPage = Configuration::get("newsPerPage");
@@ -23,7 +25,8 @@ class NewsController extends Controller {
         $this->createView(array('news' => $news,'countNews' => $countNews, 'newsPerPage' => $newsPerPage, 'nbPage' =>$nbPage));
     }
 
-    Public function aNews() {
+    public function aNews()
+    {
         $newsId = $this->request->getParams("id");
 
         $aNews = $this->newsManager->getANews($newsId);
@@ -32,17 +35,18 @@ class NewsController extends Controller {
         $this->createView(array('aNews' => $aNews, 'comments' => $comments));
     }
 
-    public function addComment() {
-        if($this->request->getSession()->existAttribut("id")) {
+    public function addComment()
+    {
+        if ($this->request->getSession()->existAttribut("id")) {
             $content = $this->request->getParams("content");
             $newsId = $this->request->getParams("newsId");
             $userId = $this->request->getSession()->getAttribut("id");
             $this->commentManager->addComment($newsId, $userId, $content);
 
             $this->redirect("News/aNews/".$newsId);
+            return;
         }
-        else {
-            $this->redirect("connect");
-        }
+        $this->redirect("connect");
+        return;
     }
 }

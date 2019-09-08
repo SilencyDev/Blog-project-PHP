@@ -5,10 +5,12 @@ namespace API\App\Blog\Factory;
 use API\App\Blog\Factory\DTOInterface;
 use API\App\Blog\DTO\GetCommentDTO;
 
-class GetCommentDTOFactory implements DTOFactoryInterface {
-    public function createFromRepository(array $data) {
+class GetCommentDTOFactory implements DTOFactoryInterface
+{
+    public function createFromRepository(array $data)
+    {
         $array = [];
-        foreach($data as $aData) {
+        foreach ($data as $aData) {
             $dto = new GetCommentDTO();
 
             $dto->setId($aData["id"]);
