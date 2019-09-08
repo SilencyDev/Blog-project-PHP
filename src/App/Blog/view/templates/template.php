@@ -23,7 +23,7 @@
                 <a href="News/index">
                     <li>News</li>
                 </a>
-                <?php if(!$request->getSession()->existAttribut("id")) : ?>
+                <?php if (!$request->getSession()->existAttribut("id")) : ?>
                 <a href="Connect/index">
                         <li>Log in</li>
                     </a>
@@ -31,7 +31,7 @@
                         <li>Sign up</li>
                     </a>
                 <?php endif; ?>
-                <?php if($request->getSession()->existAttribut("administrator") && $request->getSession()->getAttribut("administrator")) : ?>
+                <?php if ($request->getSession()->existAttribut("administrator") && $request->getSession()->getAttribut("administrator")) : ?>
                     <a href="Admin/addNewsPage">
                         <li>Add a news</li>
                     </a>
@@ -39,7 +39,7 @@
                         <li>Validation</li>
                     </a>
                 <?php endif; ?>
-                <?php if($request->getSession()->existAttribut("id")) : ?>
+                <?php if ($request->getSession()->existAttribut("id")) : ?>
                     <a href="connect/disconnect">
                         <li>Disconnect</li>
                     </a>
@@ -50,7 +50,7 @@
             </header>
             <br/><br/><br/><br/>
             <div id="error"> <!-- #error -->
-                <?php if(isset( $_SESSION['error']) && $_SESSION['error'] != "") :
+                <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "") :
                   echo $_SESSION['error'];
                   $_SESSION['error']="";
                    endif; ?> <!-- #error -->

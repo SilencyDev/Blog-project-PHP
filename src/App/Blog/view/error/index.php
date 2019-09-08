@@ -1,1 +1,1 @@
-<p><?= $errorMsg ?></p>
+<p><?= htmlspecialchars($errorMsg) ?></p>

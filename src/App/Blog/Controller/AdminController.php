@@ -8,23 +8,27 @@ use API\App\Blog\Manager\NewsManager;
 use API\App\Blog\Manager\CommentManager;
 use API\App\Blog\Manager\UserManager;
 
-class AdminController extends IsAdminController {
-
-    public function __construct() {
+class AdminController extends IsAdminController
+{
+    public function __construct()
+    {
         $this->newsManager = new NewsManager();
         $this->commentManager = new CommentManager();
         $this->userManager = new UserManager();
     }
 
-    public function index() {
+    public function index()
+    {
         $this->createView();
     }
 
-    public function addNewsPage() {
+    public function addNewsPage()
+    {
         $this->createView();
     }
 
-    public function addNews() {
+    public function addNews()
+    {
         $content = $this->request->getParams("content");
         $title = $this->request->getParams("title");
         $userId = $this->request->getSession()->getAttribut("id");
@@ -33,11 +37,13 @@ class AdminController extends IsAdminController {
         $this->redirect('News');
     }
 
-    public function updateNewsPage() {
+    public function updateNewsPage()
+    {
         $this->createView();
     }
 
-    public function updateNews() {
+    public function updateNews()
+    {
         $content = $this->request->getParams("content");
         $title = $this->request->getParams("title");
         $newsId = $this->request->getParams("newsId");
@@ -46,7 +52,8 @@ class AdminController extends IsAdminController {
         $this->redirect('News/aNews/'.$newsId);
     }
 
-    public function deleteNews() {
+    public function deleteNews()
+    {
         $newsId = $this->request->getParams("newsId");
 
         $this->commentManager->deleteCommentsFromNews($newsId);
@@ -54,14 +61,16 @@ class AdminController extends IsAdminController {
         $this->redirect('News');
     }
 
-    Public function validCommentPage() {
+    public function validCommentPage()
+    {
         $comments = $this->commentManager->getUnvalidatedComment();
 
         $this->createView(array('comments' => $comments));
     }
 
-    Public function validComment() {
-        if($this->request->existParams("validated") && $this->request->getParams("validated")) {
+    public function validComment()
+    {
+        if ($this->request->existParams("validated") && $this->request->getParams("validated")) {
             $commentId = $this->request->getParams("commentId");
 
             $this->commentManager->ValidComment($commentId);
@@ -69,7 +78,8 @@ class AdminController extends IsAdminController {
         $this->redirect('Admin/validCommentPage');
     }
 
-    public function deleteComment() {
+    public function deleteComment()
+    {
         $commentId = $this->request->getParams("commentId");
         $newsId = $this->request->getParams("newsId");
 
@@ -77,11 +87,12 @@ class AdminController extends IsAdminController {
         $this->redirect('News/anews/'.$newsId);
     }
 
-    public function deleteCommentToValid() {
+    public function deleteCommentToValid()
+    {
         $commentId = $this->request->getParams("commentId");
         $newsId = $this->request->getParams("newsId");
 
         $this->commentManager->deleteComment($commentId);
-        $this->redirect('Admin/validCommentPage/'); 
+        $this->redirect('Admin/validCommentPage/');
     }
 }

@@ -2,106 +2,123 @@
 
 namespace API\App\Blog\DTO;
 
-class GetUserDTO implements DTOInterface {
-
+class GetUserDTO implements DTOInterface
+{
     private $id;
-	private $firstName;
-	private $lastName;
-	private $pseudo;
-	private $password;
-	private $email;
-	private $dateOfBirth;
-	private $administrator;
-	private $profileDate;
+    private $firstName;
+    private $lastName;
+    private $pseudo;
+    private $password;
+    private $email;
+    private $dateOfBirth;
+    private $administrator;
+    private $profileDate;
 
-  public function getId() :int {
-		return $this->id;
-	}
+    public function getId() :int
+    {
+        return $this->id;
+    }
 
-	public function setId(int $id) :self {
-		$this->id = $id;
+    public function setId(int $id) :self
+    {
+        $this->id = $id;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getFirstName() :string {
-		return $this->firstName;
-	}
+    public function getFirstName() :string
+    {
+        return $this->firstName;
+    }
 
-	public function setFirstName(string $firstName) :self {
-		$this->firstName = $firstName;
+    public function setFirstName(string $firstName) :self
+    {
+        $this->firstName = $firstName;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getLastName() :string {
-		return $this->lastName;
-	}
+    public function getLastName() :string
+    {
+        return $this->lastName;
+    }
 
-	public function setLastName(string $lastName) :self {
-		$this->lastName = $lastName;
+    public function setLastName(string $lastName) :self
+    {
+        $this->lastName = $lastName;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getPseudo() :string {
-		return $this->pseudo;
-	}
-	
-	public function setPseudo(string $pseudo) :self {
-		$this->pseudo = $pseudo;
+    public function getPseudo() :string
+    {
+        return $this->pseudo;
+    }
+    
+    public function setPseudo(string $pseudo) :self
+    {
+        $this->pseudo = $pseudo;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getPassword() :string {
-		return $this->password;
-	}
+    public function getPassword() :string
+    {
+        return $this->password;
+    }
 
-	public function setPassword(string $passwordHash) :self {
-		$this->password = $passwordHash;
+    public function setPassword(string $passwordHash) :self
+    {
+        $this->password = $passwordHash;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getEmail() :string {
-		return $this->email;
-	}
-	
-	public function setEmail(string $email) :self {
-		$this->email = $email;
+    public function getEmail() :string
+    {
+        return $this->email;
+    }
+    
+    public function setEmail(string $email) :self
+    {
+        $this->email = $email;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getDateOfBirth() :\DateTime {
-		
-		return $this->dateOfBirth;
-	}
+    public function getDateOfBirth() :\DateTime
+    {
+        return $this->dateOfBirth;
+    }
 
-	public function setDateOfBirth(string $dateOfBirth) :self {
-		$this->dateOfBirth = new \DateTime($dateOfBirth);
+    public function setDateOfBirth(string $dateOfBirth) :self
+    {
+        $this->dateOfBirth = new \DateTime($dateOfBirth);
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getAdministrator() :bool {
-		return $this->administrator;
-	}
+    public function getAdministrator() :bool
+    {
+        return $this->administrator;
+    }
 
-	public function setAdministrator(bool $administrator) :self {
-		$this->administrator = $administrator;
+    public function setAdministrator(bool $administrator) :self
+    {
+        $this->administrator = $administrator;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function getProfileDate() :\DateTime {
-		return $this->profileDate;
-	}
+    public function getProfileDate() :\DateTime
+    {
+        return $this->profileDate;
+    }
 
-	public function setProfileDate(string $profileDate) :self {
-		$this->profileDate = new \DateTime($profileDate);
+    public function setProfileDate(string $profileDate) :self
+    {
+        $this->profileDate = new \DateTime($profileDate);
 
-		return $this;
-	}
+        return $this;
+    }
 }

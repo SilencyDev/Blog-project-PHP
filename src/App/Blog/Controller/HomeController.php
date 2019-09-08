@@ -5,17 +5,19 @@ namespace API\App\Blog\Controller;
 use API\Lib\Blog\Controller\Controller;
 use API\Lib\Blog\Config\Configuration;
 
-class HomeController extends Controller {
-
-    public function __construct() {
+class HomeController extends Controller
+{
+    public function __construct()
+    {
     }
 
-    Public function index() {
+    public function index()
+    {
         $this->createView();
     }
 
-    public function sendMail() {
-
+    public function sendMail()
+    {
         $firstName = $this->request->getParams('firstName');
         $lastName = $this->request->getParams('lastName');
         $email = $this->request->getParams('email');

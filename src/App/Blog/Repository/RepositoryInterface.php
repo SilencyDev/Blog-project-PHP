@@ -2,6 +2,6 @@
 
 namespace API\App\Blog\Repository;
 
-interface RepositoryInterface {
-    
+interface RepositoryInterface
+{
 }

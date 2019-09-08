@@ -1,6 +1,6 @@
 <?php $this->title = "Log In";?>
 <h1>Log in</h1>
-<?php if(!$request->getSession()->existAttribut("id")) : ?>
+<?php if (!$request->getSession()->existAttribut("id")) : ?>
         
         <form method="post" action="Connect/connect" class="form-group">
             <input class="form-control" id="login" name="login" placeholder="Your login (e-mail)" required><br />
@@ -10,8 +10,8 @@
 
 <?php endif; ?>
 
-<?php if($request->getSession()->existAttribut("id")) : ?>
+<?php if ($request->getSession()->existAttribut("id")) : ?>
 
-<?php echo $request->getSession()->getAttribut('pseudo') ?> you are already connected!
+<?= htmlspecialchars($request->getSession()->getAttribut('pseudo')) ?> you are already connected!
 
 <?php endif; ?>

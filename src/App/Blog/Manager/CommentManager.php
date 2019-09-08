@@ -9,51 +9,58 @@ use API\App\Blog\Factory\GetCommentDTOFactory;
 use API\App\Blog\Repository\CommentRepository;
 use API\App\Blog\Repository\GetCountCommentRepository;
 
-class CommentManager extends Db {
-  
-  public function getValidatedComment(int $newsId) {
-    $repo = new CommentRepository();
-    $factory = new GetCommentDTOFactory();
+class CommentManager extends Db
+{
+    public function getValidatedComment(int $newsId)
+    {
+        $repo = new CommentRepository();
+        $factory = new GetCommentDTOFactory();
     
-    return $factory->createFromRepository($repo->getValidatedComment($newsId));
-  }
+        return $factory->createFromRepository($repo->getValidatedComment($newsId));
+    }
   
-  public function getUnvalidatedComment() {
-    $repo = new CommentRepository();
-    $factory = new GetCommentDTOFactory();
+    public function getUnvalidatedComment()
+    {
+        $repo = new CommentRepository();
+        $factory = new GetCommentDTOFactory();
 
-    return $factory->createFromRepository($repo->getUnvalidatedComment());
-  }
+        return $factory->createFromRepository($repo->getUnvalidatedComment());
+    }
 
-  public function addComment(int $newsId, int $userId, string $content) {
-    $repo = new CommentRepository();
+    public function addComment(int $newsId, int $userId, string $content)
+    {
+        $repo = new CommentRepository();
 
-    $repo->addComment($newsId, $userId, $content);
-  }
+        $repo->addComment($newsId, $userId, $content);
+    }
 
-  public function deleteComment(int $commentId) {
-    $repo = new CommentRepository();
+    public function deleteComment(int $commentId)
+    {
+        $repo = new CommentRepository();
 
-    $repo->deleteComment($commentId);
-  }
+        $repo->deleteComment($commentId);
+    }
 
-  public function deleteCommentsFromNews(int $newsId) {
-    $repo = new CommentRepository();
+    public function deleteCommentsFromNews(int $newsId)
+    {
+        $repo = new CommentRepository();
 
-    $repo->deleteCommentFromNews($newsId);
-  }
+        $repo->deleteCommentFromNews($newsId);
+    }
 
-  public function validComment(int $commentId) {
-    $repo = new CommentRepository();
+    public function validComment(int $commentId)
+    {
+        $repo = new CommentRepository();
 
-    $repo->validComment($commentId);
-  }
+        $repo->validComment($commentId);
+    }
 
-  public function countComment() {
-    $repo = new GetCountCommentRepository();
+    public function countComment()
+    {
+        $repo = new GetCountCommentRepository();
 
-    $countComment = $repo->getCountComment();
+        $countComment = $repo->getCountComment();
 
-    return $countComment;
-  }
+        return $countComment;
+    }
 }

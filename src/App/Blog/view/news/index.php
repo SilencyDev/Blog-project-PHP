@@ -6,17 +6,18 @@
     <?php foreach ($news as $aNews):?>
         <article>
             <header>
-                <h1><a href="<?= "news/aNews/" . $aNews->getId() ?>"><?= $aNews->getTitle()?></a></h1>
-                <time><?= $aNews->getCreationDate()->format('d/m/Y \a\t H\hi') ?></time>
+                <h1><a href="<?= "news/aNews/" . htmlspecialchars($aNews->getId()) ?>"><?= htmlspecialchars($aNews->getTitle())?></a></h1>
+                <time><?= htmlspecialchars($aNews->getCreationDate()->format('d/m/Y \a\t H\hi')) ?></time>
             </header>
-            <p><?= substr($aNews->getContent(),0,200) ?>...</p>
+            <p><?= htmlspecialchars(substr($aNews->getContent(), 0, 200)) ?>...</p>
         </article>
         <br/>
     <?php endforeach; ?>
     </div>
     <br/>
 <div class="flexbox">
-    <?php for($i=1;$i<=$nbPage;$i++)
-        echo '<strong><a class="pagination" href="news/index/0/'.$i. '">'.$i.' </a></strong>'
+    <?php for ($i=1;$i<=$nbPage;$i++) {
+    echo '<strong><a class="pagination" href="news/index/0/'.htmlspecialchars($i). '">'.htmlspecialchars($i).' </a></strong>';
+}
     ?>
 </div>
