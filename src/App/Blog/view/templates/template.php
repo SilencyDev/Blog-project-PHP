@@ -51,7 +51,7 @@
             <br/><br/><br/><br/>
             <div id="error"> <!-- #error -->
                 <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "") :
-                  echo $_SESSION['error'];
+                  echo htmlspecialchars($_SESSION['error']);
                   $_SESSION['error']="";
                    endif; ?> <!-- #error -->
             </div>

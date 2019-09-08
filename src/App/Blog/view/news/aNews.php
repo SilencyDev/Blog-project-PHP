@@ -3,7 +3,7 @@
         <header>
             <h1><?= htmlspecialchars($news->getTitle()) ?></h1>
             <strong><time> Created <?= htmlspecialchars($news->getCreationDate()->format('d/m/Y \a\t H\hi')) ?></time></strong>
-            <?php if (!$news->getUpdateDate() === null) : ?>
+            <?php if ($news->getUpdateDate() !== null) : ?>
             <strong><Br/><time> Updated <?= htmlspecialchars($news->getUpdateDate()->format('d/m/Y \a\t H\hi')) ?></time></strong>
             <?php endif; ?>
         </header>
