@@ -18,7 +18,7 @@ p {
 .user {
   color: #a4d7e1;
   font-size: 2em;
-  margin-bottom: -4px!important;
+  margin-bottom: -4px;
 }
 
 .flexbox {
@@ -63,7 +63,7 @@ div#error {
 }
 
 .cv {
-  max-width: 800px !important;
+  max-width: 800px;
 }
 
 h1 {
