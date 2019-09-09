@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
-        <base href="<?= $webRoot ?>" >
+        <base href="<?= htmlspecialchars($webRoot) ?>" >
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="<?= htmlspecialchars($webRoot) ?>web/css/style21.css" type="text/css">
         <title><?= htmlspecialchars($title) ?></title>
