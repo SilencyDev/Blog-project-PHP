@@ -6,8 +6,6 @@ use API\Lib\Blog\Model\Db;
 
 class User extends Db
 {
-
-    // check if the user exist in the database
     public function connect($login, $password)
     {
         $sql = "SELECT id FROM user WHERE email=? and password=?";
@@ -15,7 +13,6 @@ class User extends Db
         return ($user->rowCount() == 1);
     }
 
-    // return the existing user from the database
     public function getUser($login, $password)
     {
         $sql = "SELECT id, email AS login, password FROM user WHERE email=? AND password=?";

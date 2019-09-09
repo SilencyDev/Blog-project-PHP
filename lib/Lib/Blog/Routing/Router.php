@@ -10,7 +10,6 @@ class Router
     public function routerRequest()
     {
         try {
-            // Regroup POST and GET into the request
             $this->clear($_POST);
             $this->clear($_GET);
             $request = new Request(array_merge($_POST, $_GET));
@@ -24,19 +23,16 @@ class Router
         }
     }
     
-    // Create a controller from the request
     private function newController(Request $request)
     {
-        $controller = "home"; // default controller
+        $controller = "home";
         if ($request->existParams('controller')) {
             $controller = $request->getParams('controller');
             $controller = ucfirst(strtolower($controller));
         }
-        // Create the file name of the controller
         $controllerClass =  "API\\App\\Blog\\Controller\\{$controller}Controller";
 
         if (class_exists($controllerClass)) {
-            // Instanciation of the controller from the request
             $controller = new $controllerClass();
             $controller->setRequest($request);
             return $controller;
@@ -44,17 +40,15 @@ class Router
         throw new \Exception("'$controllerClass' file not found");
     }
 
-    // Looking for an action to execute from the request
     private function newAction(Request $request)
     {
-        $action = "index"; // default action
+        $action = "index";
         if ($request->existParams('action')) {
             $action = $request->getParams('action');
         }
         return $action;
     }
 
-    // Display an error
     private function manageError(\Exception $exception)
     {
         $view = new View('/error/index');

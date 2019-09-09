@@ -6,7 +6,6 @@ class Configuration
 {
     private static $params;
 
-    // Return param value from the config file
     public static function get($name, $defaultValue = null)
     {
         if (isset(self::getParams()[$name])) {
@@ -17,7 +16,6 @@ class Configuration
         return $value;
     }
 
-    // return the array from the config file
     private static function getParams()
     {
         if (self::$params == null) {
