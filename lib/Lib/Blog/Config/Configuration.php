@@ -9,11 +9,9 @@ class Configuration
     public static function get($name, $defaultValue = null)
     {
         if (isset(self::getParams()[$name])) {
-            $value = self::getParams()[$name];
-            return $value;
+            return self::getParams()[$name];
         }
-        $value = $defaultValue;
-        return $value;
+        return $defaultValue;
     }
 
     private static function getParams()
@@ -25,9 +23,8 @@ class Configuration
             }
             if (!file_exists($filePath)) {
                 throw new \Exception("Configuration file not found");
-            } else {
-                self::$params = parse_ini_file($filePath);
             }
+            self::$params = parse_ini_file($filePath);
         }
         return self::$params;
     }

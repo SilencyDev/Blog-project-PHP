@@ -16,19 +16,19 @@ class CommentRepository extends Db implements RepositoryInterface
     public function addComment($newsId, $userId, $content)
     {
         $sql = 'INSERT INTO comment(newsId, userId, content, creationDate) VALUES(?, ?, ?, ?)';
-        $q = $this->executeRequest($sql, array($newsId, $userId, $content, date("Y/m/d H:i:s")));
+        $this->executeRequest($sql, array($newsId, $userId, $content, date("Y/m/d H:i:s")));
     }
 
     public function deleteCommentFromNews($newsId)
     {
         $sql = 'DELETE FROM comment WHERE newsId = ?';
-        $q = $this->executeRequest($sql, array($newsId));
+        $this->executeRequest($sql, array($newsId));
     }
 
     public function deleteComment($commentId)
     {
         $sql = 'DELETE FROM comment WHERE id = ?';
-        $q = $this->executeRequest($sql, array($commentId));
+        $this->executeRequest($sql, array($commentId));
     }
 
     public function getValidatedComment($newsId)
@@ -42,7 +42,7 @@ class CommentRepository extends Db implements RepositoryInterface
     {
         $sql = 'UPDATE comment SET validated = 1 WHERE id = ?';
     
-        $q = $this->executeRequest($sql, array($commentId));
+        $this->executeRequest($sql, array($commentId));
     }
 
     public function countAllComment()

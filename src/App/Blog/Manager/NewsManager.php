@@ -21,7 +21,7 @@ class NewsManager extends Db
         $page = isset($q) ? (int) $q : 1;
         $start = ($page > 1) ? ($page * $newsPerPage) - $newsPerPage : 0;
 
-        $news = $factory->createFromRepository($repo->getNews($page, $newsPerPage, $start));
+        $news = $factory->createFromRepository($repo->getNews($newsPerPage, $start));
 
         return $news;
     }

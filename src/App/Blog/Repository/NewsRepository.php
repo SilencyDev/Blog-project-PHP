@@ -18,7 +18,7 @@ class NewsRepository extends Db implements RepositoryInterface
         throw new \Exception("There is no news relative to '$newsId' ID");
     }
 
-    public function getNews($page, $newsPerPage, $start)
+    public function getNews($newsPerPage, $start)
     {
         $sql = "SELECT id, userId, title, content, creationDate, updateDate, category FROM news ORDER BY id DESC LIMIT {$start}, {$newsPerPage}";
 
@@ -29,20 +29,21 @@ class NewsRepository extends Db implements RepositoryInterface
     {
         $sql = ('INSERT INTO news(title, content, userId, creationDate) VALUES(?, ?, ?, ?)');
 
-        $news = $this->executeRequest($sql, array($title, $content, $userId, date("Y/m/d H:i:s")));
+        $this->executeRequest($sql, array($title, $content, $userId, date("Y/m/d H:i:s")));
     }
 
     public function updateNews($content, $title, $newsId)
     {
         $sql = 'UPDATE news SET content = ?, title = ?, updateDate = ? WHERE id = ?';
 
-        $news = $this->executeRequest($sql, array($content, $title, date('Y/m/d H:i:s'), $newsId));
+        $this->executeRequest($sql, array($content, $title, date('Y/m/d H:i:s'), $newsId));
     }
 
     public function deleteNews($newsId)
     {
         $sql = 'DELETE FROM news WHERE id = ?';
-        $q = $this->executeRequest($sql, array($newsId));
+        
+        $this->executeRequest($sql, array($newsId));
     }
 
     public function countNews()
