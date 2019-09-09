@@ -16,13 +16,11 @@ class Request
         $this->session = new Session();
     }
 
-    // return true if $params exist
     public function existParams($name)
     {
         return (isset($this->params[$name]) && $this->params[$name] !="");
     }
 
-    // return value from the parameter
     public function getParams($name)
     {
         if ($this->existParams($name)) {
@@ -31,7 +29,6 @@ class Request
         throw new \Exception("Parameter '$name' missing from request");
     }
 
-    // return associated session
     public function getSession()
     {
         return $this->session;

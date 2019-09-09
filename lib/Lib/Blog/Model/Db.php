@@ -4,11 +4,6 @@ namespace API\Lib\Blog\Model;
 
 use API\Lib\Blog\Config\Configuration;
 
-/**
- * All services relative to the database
- * Using PDO API
- */
-
  abstract class Db
  {
      private static $db;
@@ -16,10 +11,10 @@ use API\Lib\Blog\Config\Configuration;
      protected function executeRequest($sql, $params = null)
      {
          if ($params == null) {
-             $result = self::getDb()->query($sql); // direct request
+             $result = self::getDb()->query($sql);
              return $result;
          }
-         $result = self::getDb()->prepare($sql); // prepared request
+         $result = self::getDb()->prepare($sql);
          $result->execute($params);
          return $result;
      }
@@ -27,11 +22,9 @@ use API\Lib\Blog\Config\Configuration;
      private static function getDb()
      {
          if (self::$db === null) {
-             // Getting credentials for database connexion
              $dsn = Configuration::get("dsn");
              $login = Configuration::get('login');
              $password = Configuration::get('password');
-             // Starting connexion
              self::$db = new \PDO(
                  $dsn,
                  $login,
