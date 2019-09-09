@@ -1,4 +1,8 @@
-<?php $this->title = "Blog"; ?>
+<?php
+$news = $data["news"];
+$nbPage = $data["nbPage"];
+
+$this->title = "Blog"; ?>
 <div class="flexbox">
     <h1>Last News</h1>
 </div><br/>
@@ -13,11 +17,10 @@
         </article>
         <br/>
     <?php endforeach; ?>
-    </div>
-    <br/>
+</div>
+<br/>
 <div class="flexbox">
     <?php for ($i=1;$i<=$nbPage;$i++) {
     echo '<strong><a class="pagination" href="news/index/0/'.htmlspecialchars($i). '">'.htmlspecialchars($i).' </a></strong>';
-    }
-    ?>
+    } ?>
 </div>

@@ -21,14 +21,14 @@ class UserRepository extends Db implements RepositoryInterface
     {
         $sql = 'INSERT INTO user(firstName, lastName, pseudo, password, email, dateOfBirth, profileDate) VALUES(?, ?, ?, ?, ?, ?, ?)';
 
-        $q = $this->executeRequest($sql, array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s")));
+        $this->executeRequest($sql, array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s")));
     }
 
     public function updateUser($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, $request)
     {
-        $q = 'UPDATE user SET firstName = ?, lastName = ?, pseudo = ?, password = ?, email = ?, dateOfBirth = ?, administrator = ? WHERE id =?';
+        $sql = 'UPDATE user SET firstName = ?, lastName = ?, pseudo = ?, password = ?, email = ?, dateOfBirth = ?, administrator = ? WHERE id =?';
 
-        $q = $this->executeRequest($sql, array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s"), $request->getSession()->getAttribut('id')));
+        $this->executeRequest($sql, array($firstName, $lastName, $pseudo, $password, $email, $dateOfBirth, date("Y/m/d H:i:s"), $request->getSession()->getAttribut('id')));
     }
 
     public function deleteUser($userId)

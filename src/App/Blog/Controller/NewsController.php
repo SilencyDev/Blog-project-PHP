@@ -29,10 +29,10 @@ class NewsController extends Controller
     {
         $newsId = $this->request->getParams("id");
 
-        $aNews = $this->newsManager->getANews($newsId);
+        $news = $this->newsManager->getANews($newsId)[0];
         $comments = $this->commentManager->getValidatedComment($newsId);
 
-        $this->createView(array('aNews' => $aNews, 'comments' => $comments));
+        $this->createView(array('news' => $news, 'comments' => $comments));
     }
 
     public function addComment()

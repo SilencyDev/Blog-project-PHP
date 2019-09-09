@@ -1,3 +1,7 @@
+<?php
+$webRoot = $data["webRoot"];
+$title = $data["title"];
+$content = $data["content"]; ?>
 <!doctype html>
 <html lang="fr">
     <head>

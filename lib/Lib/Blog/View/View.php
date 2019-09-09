@@ -33,7 +33,6 @@ class View
     public function createfile($viewFile, $data, $request = null)
     {
         if (file_exists($viewFile)) {
-            extract($data);
             ob_start();
             require $viewFile;
             return ob_get_clean();

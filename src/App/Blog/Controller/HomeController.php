@@ -7,10 +7,6 @@ use API\Lib\Blog\Config\Configuration;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-    }
-
     public function index()
     {
         $this->createView();

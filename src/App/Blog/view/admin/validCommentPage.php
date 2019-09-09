@@ -1,4 +1,6 @@
-<?php $this->title = "Validation"; ?>
+<?php 
+$comments = $data["comments"];
+$this->title = "Validation"; ?>
 <h1>Valid a comment</h1>
 <div class="flexboxCL">
 <?php foreach ($comments as $comment):
