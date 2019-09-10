@@ -17,8 +17,8 @@ class NewsManager extends Db
         $factory = new GetNewsDTOFactory();
         $newsPerPage = Configuration::get("newsPerPage");
 
-        $q = $request->existParams('page') ? $request->getParams('page') : null;
-        $page = isset($q) ? (int) $q : 1;
+        $pageNumber = $request->existParams('page') ? $request->getParams('page') : null;
+        $page = isset($pageNumber) ? (int) $pageNumber : 1;
         $start = ($page > 1) ? ($page * $newsPerPage) - $newsPerPage : 0;
 
         $news = $factory->createFromRepository($repo->getNews($newsPerPage, $start));
